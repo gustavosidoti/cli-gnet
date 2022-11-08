@@ -5,6 +5,7 @@ import { PagesComponent } from './pages.component';
 import { PrestamosComponent } from './prestamos/prestamos.component';
 import { AppComponent } from '../app.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 
 
@@ -13,6 +14,7 @@ const routes: Routes = [
     {
         path: 'prestamos', 
         component: PagesComponent,
+        canActivate: [ AuthGuard ],
         children: [
             {path: '', component: PrestamosComponent},
             {path: 'nuevoprestamo', component: AppComponent},
