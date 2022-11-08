@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {catchError, map, tap} from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
 
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
-import { Observable, of } from 'rxjs';
+
 
 // colocamos la ruta de los environments
 const base_url = environment.base_url;
@@ -17,12 +19,20 @@ const base_url = environment.base_url;
 export class UsuarioService {
 
   constructor( private http: HttpClient,
+               private router: Router
                 ) { }
+
+  logout(){
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('/login');
+  }
+
+
   // Verifica el token que recibe el usuario al loguearse
-  validarToken(): any {
+  validarToken(): Observable<boolean> {
     const token = localStorage.getItem('token') || '';
 
-    this.http.get(`${base_url}/login/renew`, {
+    return this.http.get(`${base_url}/auth/login/renew`, {
       headers: {
         'x-token': token
       }

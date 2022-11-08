@@ -1,11 +1,12 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { AuthGuard } from '../guards/auth.guard';
+
 import { PagesComponent } from './pages.component';
 
 import { PrestamosComponent } from './prestamos/prestamos.component';
 import { AppComponent } from '../app.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { AuthGuard } from '../guards/auth.guard';
 
 
 
