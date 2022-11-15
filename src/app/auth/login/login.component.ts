@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
-import { Router } from '@angular/router';
+import { Router, CanActivate } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
@@ -10,7 +10,12 @@ import { UsuarioService } from '../../services/usuario.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  
+  
+  ngOnInit(): void {
+   
+  }
 
   public formSubmitted = false;
 

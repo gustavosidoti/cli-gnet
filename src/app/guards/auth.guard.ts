@@ -12,17 +12,21 @@ export class AuthGuard implements CanActivate {
                private router: Router ) {}
 
   canActivate(
-    route: ActivatedRouteSnapshot,
+    next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot){
     
     return this.usuarioService.validarToken()
          .pipe(
           tap( estaAutenticado => {
             if( !estaAutenticado ) {
+              console.log('Bloqueado por el Guard');
               this.router.navigateByUrl('/login');
             }
           })
          );
   }
+
+
+  
   
 }

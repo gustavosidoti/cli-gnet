@@ -12,4 +12,6 @@ export class PrestamosComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
+
 }
