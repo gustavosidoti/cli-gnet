@@ -33,24 +33,33 @@ export class UsuarioService {
     this.router.navigateByUrl('/login');
   }
 
+  get token(){
+   return localStorage.getItem('token') || '';
+   
+  }
+  
+  get headers() {
+     return {
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache',
+      'Expires': 'Sat, 01 Jan 2000 00:00:00 GMT',
+      'x-token': this.token
+    }
+  }
+
 
   // Verifica el token que recibe el usuario al loguearse
    validarToken(): Observable<boolean> {
-    const token = localStorage.getItem('token') || '';
+    
 
     return this.http.get(`${base_url}/auth/login/renew`, {
-      headers: {
-        'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache',
-        'Expires': 'Sat, 01 Jan 2000 00:00:00 GMT',
-        'x-token': token
-      }
+      // aca va los headers
     }).pipe(
       tap( (resp: any) => {
 
-        //const {nombre , email, role, status, google, uid } = resp.usuarioDB;
+        const {nombre , email, role, status, google, uid } = resp;
 
-        //this.usuarioDB = new Usuario( nombre , email, role, status, google, uid);
+        this.usuario = new Usuario( nombre , email, role, status, google, uid);
         console.log(resp.token);
         localStorage.setItem('token', resp.token );
       }),

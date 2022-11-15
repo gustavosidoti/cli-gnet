@@ -15,7 +15,7 @@ const routes: Routes = [
     {
         path: 'prestamos', 
         component: PagesComponent,
-        canActivate: [ AuthGuard ],
+        //canActivate: [ AuthGuard ],
         children: [
             {path: '', component: PrestamosComponent},
             {path: 'nuevoprestamo', component: AppComponent},
