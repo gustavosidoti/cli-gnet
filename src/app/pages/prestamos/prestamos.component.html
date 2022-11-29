@@ -21,7 +21,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" *ngIf="cargando">
                         <div class="col-12">
                             <div class="alert alert-info text-center">
                                 <h4 class="alert-heading">Cargando</h4>
@@ -34,7 +34,7 @@
                     </div>
 
                     <!-- table striped -->
-                    <div class="table-responsive">
+                    <div class="table-responsive" *ngIf="!cargando">
                         <table class="table table-striped mb-0">
                             <thead>
                                 <tr>
@@ -45,6 +45,7 @@
                                     <th>observaciones</th>
                                     <th>fecha devolución</th>
                                     <th>usuario</th>
+                                    <th>acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,6 +57,9 @@
                                     <td>{{prestamo.observaciones}}</td>
                                     <td>{{prestamo.fechaVencimiento}}</td>
                                     <td>{{prestamo.usuario}}</td>
+                                    <td class="text-nowrap text-center">
+                                        <a href="#" data-toggle="tooltip" class="btn btn-warning btn-sm">Devolver</a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

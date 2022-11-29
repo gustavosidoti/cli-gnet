@@ -12,6 +12,7 @@ export class PrestamosComponent implements OnInit {
   public totalPrestamos: number = 0;
   public prestamos: Prestamos[] = [];
   public desde: number = 0;
+  public cargando: boolean = true;
 
   constructor(private prestamosService: PrestamosService) { }
 
@@ -22,11 +23,12 @@ export class PrestamosComponent implements OnInit {
   }
 
   cargarPrestamos () {
+    this.cargando = true;
     this.prestamosService.cargarPrestamos( this.desde )
          .subscribe( ({total, prestamos}) => {
           this.totalPrestamos = total;
           this.prestamos = prestamos;
-          
+          this.cargando = false;
           
          })
   }
