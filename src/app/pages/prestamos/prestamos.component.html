@@ -15,7 +15,9 @@
                                 <div class="card-body">
                                     <input type="text" 
                                      class="form-control"
-                                     placeholder="Buscar préstamos ..."/>
+                                     placeholder="Buscar préstamos ..."
+                                     (keyup)="buscar( txtTermino.value)"
+                                     #txtTermino/>
                                 </div>
                             </div>
                         </div>

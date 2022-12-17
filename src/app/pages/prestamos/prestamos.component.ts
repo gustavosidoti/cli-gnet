@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Prestamos } from 'src/app/models/prestamos.model';
+import { BusquedasService } from 'src/app/services/busquedas.service';
 import { PrestamosService } from 'src/app/services/prestamos.service';
 
 @Component({
@@ -14,7 +15,9 @@ export class PrestamosComponent implements OnInit {
   public desde: number = 0;
   public cargando: boolean = true;
 
-  constructor(private prestamosService: PrestamosService) { }
+  constructor(private prestamosService: PrestamosService,
+              private busquedasService: BusquedasService
+            ) { }
 
   ngOnInit(): void {
     
@@ -42,6 +45,15 @@ export class PrestamosComponent implements OnInit {
       this.desde -= valor;
     }
       this.cargarPrestamos();
+  }
+
+  buscar( termino: string){
+
+    this.busquedasService.buscar( 'prestamos', termino)
+       .subscribe( resultados => {
+         this.prestamos = resultados
+       })
+
   }
 
   
