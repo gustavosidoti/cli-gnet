@@ -37,11 +37,15 @@ export class CarrerasService {
     return this.http.post( url, data ,this.headers );
     }
 
-    listarCarreras(desde: number = 0){
-      const url = `${ base_url }/carreras?desde=${ desde }`;
+    listarCarreras(desde: number = 0, criterio:string = ''){
 
+      console.log({criterio});
+      const url = `${ base_url }/carreras?desde=${desde}&criterio=${criterio}`;
+      
       return this.http.get( url, this.headers );    
     }
+
+    
 
     editarCarrera(data:any){
 

@@ -14,6 +14,9 @@ export class ListarCarrerasComponent implements OnInit {
   public totalCarreras: number = 0;
   carreras:any = [];
   public desde: number = 0;
+  mostrarBtnSiguientes: boolean = true;
+  mostrarBtnAnteriores: boolean = false;
+
 
   constructor(public pageActive: PagesActiveService,
               public carreraService: CarrerasService,
@@ -22,66 +25,88 @@ export class ListarCarrerasComponent implements OnInit {
   mostrar: boolean = true;
   nCarrera:any='';
   idCarrera:any;
+  criterioBusqueda:any='';
 
   ngOnInit(): void {
 
     this.pageActive.paginaActiva(7);
-    this.listarCarreras()
+    this.listarCarreras(0)
   }
 
 
   cambiarPagina( valor: number){
 
-
     this.desde += valor;
-    
+    this.mostrarBtnSiguientes = true;
+
     if ( this.desde < 0) {
       this.desde = 0;
     } else if ( this.desde >= this.totalCarreras ) {
       this.desde -= valor;
+      this.mostrarBtnSiguientes = false;
     }
-      
+
+    if(this.desde + 1 == this.totalCarreras) {
+      this.mostrarBtnSiguientes = false;
+    }
+    if(this.desde + 2 == this.totalCarreras){
+      this.mostrarBtnSiguientes = false;
+    }
+    if(this.desde + 3 == this.totalCarreras){
+      this.mostrarBtnSiguientes = false;
+    }
+    if(this.desde + 4 == this.totalCarreras){
+      this.mostrarBtnSiguientes = false;
+    }
+    if(this.desde + 5 == this.totalCarreras){
+      this.mostrarBtnSiguientes = false;
+    }
+    
+    this.listarCarreras(this.desde, this.criterioBusqueda); 
   }
 
   registrarCarrera(){
     let data = {
      nombreCarrera: this.nCarrera
     }
-
-    console.log(data)
-    
     this.carreraService.agregarCarrera(data).subscribe( (resp:any) => {
       // Alerta de bienvenida
       Swal.fire('Success', resp.msg, 'success');
       
       // Navegar al Dashboard
-      this.listarCarreras();
+      this.listarCarreras(0);
 
       this.nCarrera = '';
+      this.mostrarBtnSiguientes = true;
+      this.desde = 0;
     })
     
   }
 
-  listarCarreras(){
-    this.carreraService.listarCarreras().subscribe((resp:any) =>{
+  listarCarreras( desde:any, criterio:any = ""){
+    
+    this.carreraService.listarCarreras(desde,criterio).subscribe((resp:any) =>{
       setTimeout(() => {
       this.carreras = resp.carreras;
+      this.totalCarreras = resp.cantidad;
+      
       this.mostrar = false;
-      }, 1000);
+      }, 500);
         
     })
+
   }
 
   async eliminar( id:any){
     await this.FormeditarCarrera('', id);
     Swal.fire({
       title: "Quieres eliminar esta carrera?",
-      text: "Al aceptar, no podrás reestablecer este cambio",
+      text: "Al eliminar, no podrás reestablecer este cambio",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Eliminar"
     }).then( async(result) => {
       if (result.isConfirmed) {
        
@@ -92,8 +117,10 @@ export class ListarCarrerasComponent implements OnInit {
             icon: "success"
           });
            // Refrezca el listado
-       this.listarCarreras();
+       this.listarCarreras(0,this.criterioBusqueda);
        this.nCarrera = '';
+       this.desde = 0;
+       this.mostrarBtnSiguientes = true;
          })
         
       }
@@ -117,10 +144,31 @@ export class ListarCarrerasComponent implements OnInit {
       Swal.fire('Success', resp.msg, 'success');
       
       // Navegar al Dashboard
-       this.listarCarreras();
+       this.listarCarreras(0,this.criterioBusqueda);
 
        this.nCarrera = '';
     })    
+  }
+
+  buscarCarreras(term: string):void {
+    
+    /*
+    // reseteamos el botón de siguiente
+    if(term === '' ){
+      this.mostrarBtnSiguientes = true;
+      this.desde = 0;
+    }
+    if( this.carreras.length < 5){
+      this.mostrarBtnSiguientes = false;
+      this.desde = 0;
+    }else{
+      this.mostrarBtnSiguientes = true;
+    }
+    */
+
+    this.listarCarreras(0,term);
+   
+
   }
 
 

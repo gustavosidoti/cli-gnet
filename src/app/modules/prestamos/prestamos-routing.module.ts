@@ -26,7 +26,8 @@ const routes: Routes = [{
       path:'devoluciones',
       component:DevolucionesComponent
     }
-  ]
+  ],
+  
 }];
 
 @NgModule({

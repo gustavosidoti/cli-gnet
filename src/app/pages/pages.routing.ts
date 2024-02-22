@@ -52,7 +52,7 @@ const routes: Routes = [
                   import('../modules/reparaciones/reparaciones.module').then((m) => m.ReparacionesModule),
               },
               {
-                path: '',
+                path: '**',
                 loadChildren: () =>
                   import('../modules/prestamos/prestamos.module').then((m) => m.PrestamosModule),
               },

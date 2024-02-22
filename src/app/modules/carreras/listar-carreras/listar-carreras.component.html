@@ -13,7 +13,13 @@
                                 <div class="card-body">
                                     <input type="text" 
                                      class="form-control"
-                                     placeholder="Buscar préstamos ..."/>
+                                     placeholder="Buscar carreras ..."
+                                     (keyup.enter)="buscarCarreras( buscador.value)"
+                                     #buscador
+                                     name="criterioBusqueda"
+                                     [(ngModel)]="criterioBusqueda"
+                                   
+                                     />
                                 </div>
                             </div>
                         </div>
@@ -37,7 +43,8 @@
                             </div>
                         </div>
                     </div>
-
+                <!-- DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
+                <div *ngIf="carreras.length > 0">
                     <div class="row" *ngIf="mostrar == false">
                         <div class="col-12">
                             <button class="btn btn-success" data-bs-toggle="modal"
@@ -86,6 +93,9 @@
                  </div>
 
                     <!-- table striped -->
+                    
+
+                    
                     <div class="table-responsive">
                         <table class="table table-striped mb-0">
                             <thead>
@@ -153,10 +163,22 @@
                             </tbody>
                         </table>
                     </div>
+                
                     <br>
-                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button>
+                    <button [ngClass]=" desde < 5 ? 'btn disabled' : ''" (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button>
                     &nbsp;
-                    <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguientes</button>
+                    <button [ngClass]=" this.carreras.length < 5 ? 'btn disabled' : ''" (click)="cambiarPagina(5)" class="btn btn-secondary">Siguientes</button>
+                    <!-- 
+                    <button [ngClass]=" desde < 5 ? 'btn disabled' : ''" (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button>
+                    &nbsp;
+                    <button [ngClass]=" !mostrarBtnSiguientes ? 'btn disabled' : ''" (click)="cambiarPagina(5)" class="btn btn-secondary">Siguientes</button>
+                    -->
+                </div>
+                <!-- FIN DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
+                </div>
+
+                <div *ngIf="carreras.length === 0" class="alert alert-warning text-center">
+                    No hay registros para mostrar
                 </div>
                 
             </div>
