@@ -12,70 +12,75 @@
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
-                <li class="sidebar-title">Menu</li>
+                <li class="sidebar-title">Préstamos</li>
 
-                <li class="sidebar-item active ">
-                    <a href="index.html" class='sidebar-link'>
+                <li [ngClass]=" isActive == 1 ? 'sidebar-item active' : 'sidebar-item'">
+                    <a href="/prestamos/listar-prestamos" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
-                        <span>Dashboard</span>
+                        <span>Listar Préstamos</span>
                     </a>
                 </li>
-
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
+                
+                
+                
+                <li [ngClass]=" isActive == 2 ? 'sidebar-item active' : 'sidebar-item'">
+                    <a href="/prestamos/agregar-prestamo" class='sidebar-link'>
                         <i class="bi bi-collection-fill"></i>
                         <span>Nuevo Préstamo</span>
                     </a>
                 </li>
+                
+                
 
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
+                <li [ngClass]=" isActive == 3 ? 'sidebar-item active' : 'sidebar-item'">
+                    <a href="/prestamos/devoluciones" class='sidebar-link'>
                         <i class="bi bi-x-octagon-fill"></i>
-                        <span>Devolución</span>
+                        <span>Devoluciones</span>
                     </a>
                 </li>
 
                 <li class="sidebar-title">Reparaciones</li>
 
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
+                <li [ngClass]=" isActive == 4 ? 'sidebar-item active' : 'sidebar-item'">
+                    <a href="/reparaciones/listar-reparaciones" class='sidebar-link'>
                         <i class="bi bi-hexagon-fill"></i>
                         <span>Listar Reparaciones</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item">
-                    <a href="form-layout.html" class='sidebar-link'>
+                <li [ngClass]=" isActive == 5 ? 'sidebar-item active' : 'sidebar-item'">
+                    <a href="/reparaciones/agregar-reparaciones" class='sidebar-link'>
                         <i class="bi bi-file-earmark-medical-fill"></i>
                         <span>Cargar Reparación</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
+                <li [ngClass]=" isActive == 6 ? 'sidebar-item active' : 'sidebar-item'">
+                    <a href="/reparaciones/reparaciones-finalizadas" class='sidebar-link'>
                         <i class="bi bi-x-octagon-fill"></i>
-                        <span>Finalizar Reparación</span>
+                        <span>Reparaciones Finalizadas</span>
                     </a>
                 </li>
 
                 <li class="sidebar-title">Administración</li>
 
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
+                <li [ngClass]=" isActive == 7 ? 'sidebar-item active' : 'sidebar-item'">
+                    <a href="/carreras/listar-carreras" class='sidebar-link'>
                         <i class="bi bi-pentagon-fill"></i>
                         <span>Carreras</span>
                     </a>
                 </li>
+                
 
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
+                <li [ngClass]=" isActive == 8 ? 'sidebar-item active' : 'sidebar-item'">
+                    <a href="/elementos/listar-elementos" class='sidebar-link'>
                         <i class="bi bi-egg-fill"></i>
                         <span>Elementos</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
+                <li [ngClass]=" isActive == 9 ? 'sidebar-item active' : 'sidebar-item'">
+                    <a href="/personas/listar-personas" class='sidebar-link'>
                         <i class="bi bi-person-badge-fill"></i>
                         <span>Personas</span>
                     </a>

@@ -40,6 +40,9 @@ export class LoginComponent implements OnInit {
           } else {
              localStorage.removeItem('email');
           } 
+
+           // Alerta de bienvenida
+           Swal.fire('Success', 'Acceso correcto', 'success');
             // Navegar al Dashboard
             this.router.navigateByUrl('/')
 

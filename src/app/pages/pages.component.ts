@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Prestamos } from '../models/prestamos.model';
 import { PrestamosService } from '../services/prestamos.service';
 
@@ -9,17 +10,12 @@ import { PrestamosService } from '../services/prestamos.service';
 })
 export class PagesComponent implements OnInit {
 
-  public totalPrestamos: number = 0;
-  public prestamos: Prestamos[] = [];
   
-  constructor(private prestamosService: PrestamosService) { }
+  
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
-    this.prestamosService.cargarPrestamos(0)
-         .subscribe( ({total, prestamos}) => {
-          this.totalPrestamos = total;
-          this.prestamos = prestamos;
-         })
+    //this.router.navigate(['/prestamos/listar-prestamos']);
   }
 
 }

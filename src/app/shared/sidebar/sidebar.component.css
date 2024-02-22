@@ -1,0 +1,7 @@
+.nav-primary {
+    color : "Black";
+}
+
+.nav-primary.active {
+   color : "white";
+}

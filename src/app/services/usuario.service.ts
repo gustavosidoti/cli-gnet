@@ -21,7 +21,7 @@ const base_url = environment.base_url;
 
 export class UsuarioService {
 
-  public usuario!: Usuario;
+  public usuario: Usuario;
 
   constructor( private http: HttpClient,
                private router: Router,

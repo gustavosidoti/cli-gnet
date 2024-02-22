@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsuariosComponent } from './usuarios/usuarios.component';
-import { PrestamosComponent } from './prestamos/prestamos.component';
+
+
 import { PagesComponent } from './pages.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { UsuariosComponent } from '../modules/usuarios/usuarios.component';
+import { ListarPrestamosComponent } from '../modules/prestamos/listar-prestamos/listar-prestamos.component';
+import { PrestamosModule } from '../modules/prestamos/prestamos.module';
 
 
 
 @NgModule({
   declarations: [
-    UsuariosComponent,
-    PrestamosComponent,
     PagesComponent
   ],
   exports:[
-    UsuariosComponent,
-    PrestamosComponent,
     PagesComponent,
   ],
   imports: [
