@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { CargarPrestamos } from '../interfaces/cargar-prestamos';
 
 // colocamos la ruta de los environments
 const base_url = environment.base_url;
@@ -10,7 +9,7 @@ const base_url = environment.base_url;
 @Injectable({
   providedIn: 'root'
 })
-export class CarrerasService {
+export class PersonasService {
 
   constructor(private http: HttpClient,
     private router: Router) { }
@@ -31,34 +30,54 @@ export class CarrerasService {
     }
     }
 
-    agregarCarrera(data:any){
-    const url = `${ base_url }/carreras`;
+    agregarPersona(data:any){
+    const url = `${ base_url }/Personas`;
     
     return this.http.post( url, data ,this.headers );
     }
 
-    listarCarreras(desde: number = 0, criterio:string = ''){
+    listarPersonas(desde: number = 0, criterio:string = ''){
 
       
-      const url = `${ base_url }/carreras?desde=${desde}&criterio=${criterio}`;
+      const url = `${ base_url }/Personas?desde=${desde}&criterio=${criterio}`;
+      
+      return this.http.get( url, this.headers );    
+    }
+
+    listarPersonasPorCarrera(desde: number = 0, carrera:string = ''){
+
+      let data = {
+        desde: desde,
+        id_carrera: carrera
+
+      }
+      
+      const url = `${ base_url }/Personas/personacarrera`;
+      
+      return this.http.post( url, data , this.headers );    
+    }
+
+    listarPersonaById(id:any){
+     
+      const url = `${ base_url }/Personas/${id}`;
       
       return this.http.get( url, this.headers );    
     }
 
     
 
-    editarCarrera(data:any){
+    editarPersona(data:any){
 
       console.log(data);
-      const url = `${ base_url }/carreras/${data.id}`;
+      const url = `${ base_url }/Personas/${data.id}`;
     
       return this.http.put( url, data ,this.headers );
     }
 
-    eliminarCarrera(data:any){
+    eliminarPersona(data:any){
 
       console.log(data);
-      const url = `${ base_url }/carreras/delete?id=${data}`;
+      const url = `${ base_url }/Personas/delete?id=${data}`;
     
       return this.http.delete( url, this.headers );
     }

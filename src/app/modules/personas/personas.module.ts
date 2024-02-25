@@ -6,6 +6,7 @@ import { PersonasComponent } from './personas.component';
 import { AgregarPersonasComponent } from './agregar-personas/agregar-personas.component';
 import { ListarPersonasComponent } from './listar-personas/listar-personas.component';
 import { EditarPersonasComponent } from './editar-personas/editar-personas.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import { EditarPersonasComponent } from './editar-personas/editar-personas.compo
   ],
   imports: [
     CommonModule,
-    PersonasRoutingModule
+    PersonasRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class PersonasModule { }

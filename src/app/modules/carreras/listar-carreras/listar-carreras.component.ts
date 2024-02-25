@@ -151,23 +151,8 @@ export class ListarCarrerasComponent implements OnInit {
   }
 
   buscarCarreras(term: string):void {
-    
-    /*
-    // reseteamos el botón de siguiente
-    if(term === '' ){
-      this.mostrarBtnSiguientes = true;
-      this.desde = 0;
-    }
-    if( this.carreras.length < 5){
-      this.mostrarBtnSiguientes = false;
-      this.desde = 0;
-    }else{
-      this.mostrarBtnSiguientes = true;
-    }
-    */
 
     this.listarCarreras(0,term);
-   
 
   }
 
