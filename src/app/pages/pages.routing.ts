@@ -15,6 +15,11 @@ const routes: Routes = [
         component: PagesComponent,
         //canActivate: [ AuthGuard ],
         children: [
+          {
+            path: '',
+            redirectTo: 'prestamos/listar-prestamos',
+            pathMatch: 'full'
+          },
 
             {
                 path: 'dashboard',
@@ -51,6 +56,7 @@ const routes: Routes = [
                 loadChildren: () =>
                   import('../modules/reparaciones/reparaciones.module').then((m) => m.ReparacionesModule),
               },
+              
               {
                 path: '**',
                 loadChildren: () =>
