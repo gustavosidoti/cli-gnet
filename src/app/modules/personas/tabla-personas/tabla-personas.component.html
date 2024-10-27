@@ -1,0 +1,52 @@
+<!-- DIV QUE ENGLOBA TABLA + BOTONES DE NAVEGACION  -->
+<div *ngIf="personas.length > 0">
+
+
+  <!-- table striped -->
+
+  <div class="table-responsive">
+      <table class="table table-striped mb-0">
+          <thead>
+              <tr>
+                  <th>Nombre</th>
+                  <th>Carrera</th>
+                  <th>Acción</th>
+
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let persona of personas">
+                 <td>{{persona.nombre}}</td>
+                 <td>
+                  <ul style="list-style-type: none;">
+                      <li *ngFor="let carrera of persona.carrera">{{carrera.nombreCarrera}}</li>
+                  </ul>
+                 </td>
+                  <td>
+                      <div class="buttons">
+                        <!--  <a (click)="FormeditarPersona(persona.nombre, persona._id, persona.dni)" class="btn icon btn-warning" data-bs-toggle="modal"
+                          data-bs-target="#editForm"> <i class="bi bi-pencil-square"></i></a>
+                          <a (click)="eliminar(persona._id)" class="btn icon btn-danger"><i class="bi bi-trash"></i></a>
+
+                         -->
+                      <a (click)="FormeditarPersona(persona._id)" class="btn icon btn-warning" data-bs-toggle="modal"
+                          data-bs-target="#editForm"> <i class="bi bi-pencil-square"></i></a>
+
+                      <a (click)="eliminar(persona._id)" class="btn icon btn-danger"><i class="bi bi-trash"></i></a>
+
+                      </div>
+
+                  </td>
+
+              </tr>
+
+          </tbody>
+      </table>
+  </div>
+
+  <br>
+  <button [ngClass]=" desde < 5 ? 'btn disabled' : ''" (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button>
+  &nbsp;
+  <button [ngClass]=" this.personas.length < 5 || (desde + 5) === totalPersonas ? 'btn disabled' : ''" (click)="cambiarPagina(5)" class="btn btn-secondary">Siguientes</button>
+
+</div>

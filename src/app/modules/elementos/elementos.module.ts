@@ -6,6 +6,7 @@ import { ElementosComponent } from './elementos.component';
 import { AgregarElementosComponent } from './agregar-elementos/agregar-elementos.component';
 import { EditarElementosComponent } from './editar-elementos/editar-elementos.component';
 import { ListarElementosComponent } from './listar-elementos/listar-elementos.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import { ListarElementosComponent } from './listar-elementos/listar-elementos.co
   ],
   imports: [
     CommonModule,
-    ElementosRoutingModule
+    ElementosRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class ElementosModule { }
