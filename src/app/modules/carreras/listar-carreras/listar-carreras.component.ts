@@ -61,8 +61,8 @@ export class ListarCarrerasComponent implements OnInit {
     if(this.desde + 5 == this.totalCarreras){
       this.mostrarBtnSiguientes = false;
     }
-    
-    this.listarCarreras(this.desde, this.criterioBusqueda); 
+
+    this.listarCarreras(this.desde, this.criterioBusqueda);
   }
 
   registrarCarrera(){
@@ -72,7 +72,7 @@ export class ListarCarrerasComponent implements OnInit {
     this.carreraService.agregarCarrera(data).subscribe( (resp:any) => {
       // Alerta de bienvenida
       Swal.fire('Success', resp.msg, 'success');
-      
+
       // Navegar al Dashboard
       this.listarCarreras(0);
 
@@ -80,19 +80,19 @@ export class ListarCarrerasComponent implements OnInit {
       this.mostrarBtnSiguientes = true;
       this.desde = 0;
     })
-    
+
   }
 
   listarCarreras( desde:any, criterio:any = ""){
-    
+
     this.carreraService.listarCarreras(desde,criterio).subscribe((resp:any) =>{
       setTimeout(() => {
       this.carreras = resp.carreras;
       this.totalCarreras = resp.cantidad;
-      
+
       this.mostrar = false;
       }, 500);
-        
+
     })
 
   }
@@ -109,7 +109,7 @@ export class ListarCarrerasComponent implements OnInit {
       confirmButtonText: "Eliminar"
     }).then( async(result) => {
       if (result.isConfirmed) {
-       
+
          await this.carreraService.eliminarCarrera(this.idCarrera).subscribe((resp:any) =>{
           Swal.fire({
             title: "Carrera Eliminada!",
@@ -122,7 +122,7 @@ export class ListarCarrerasComponent implements OnInit {
        this.desde = 0;
        this.mostrarBtnSiguientes = true;
          })
-        
+
       }
     });
 
@@ -138,19 +138,21 @@ export class ListarCarrerasComponent implements OnInit {
       id : this.idCarrera,
       nombreCarrera : this.nCarrera
     }
-    
+
     this.carreraService.editarCarrera(data).subscribe((resp:any) =>{
       // Alerta de bienvenida
       Swal.fire('Success', resp.msg, 'success');
-      
+
       // Navegar al Dashboard
        this.listarCarreras(0,this.criterioBusqueda);
 
        this.nCarrera = '';
-    })    
+    })
   }
 
-  buscarCarreras(term: string):void {
+  // FUNCION PARA BUSCAR PERSONAS Y MOSTRAR RESULTADOS EN TABLA
+
+  buscarCarreras(term: any):void {
 
     this.listarCarreras(0,term);
 

@@ -7,6 +7,7 @@ import { ListarCarrerasComponent } from './listar-carreras/listar-carreras.compo
 import { EditarCarrerasComponent } from './editar-carreras/editar-carreras.component';
 import { AgregarCarrerasComponent } from './agregar-carreras/agregar-carreras.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { BuscadorCarrerasComponent } from './buscador-carreras/buscador-carreras.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     CarrerasComponent,
     ListarCarrerasComponent,
     EditarCarrerasComponent,
-    AgregarCarrerasComponent
+    AgregarCarrerasComponent,
+    BuscadorCarrerasComponent
   ],
   imports: [
     CommonModule,
