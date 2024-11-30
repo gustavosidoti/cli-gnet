@@ -15,7 +15,7 @@ export class ListarElementosComponent implements OnInit {
   public totalelementos: number = 0;
   elementos:any[] = [];
   elemento:any;
-  
+
   // paginacion
   public desde: number = 0;
   mostrarBtnSiguientes: boolean = true;
@@ -32,7 +32,7 @@ export class ListarElementosComponent implements OnInit {
   criterioBusquedaP:any='';
   opcionSeleccionada: string = '';
 
-  
+
 
   constructor(public pageActive: PagesActiveService,
               public elementoService: ElementosService,
@@ -41,10 +41,10 @@ export class ListarElementosComponent implements OnInit {
   ngOnInit(): void {
 
     this.pageActive.paginaActiva(8);
-    
+
   }
- 
- 
+
+
 
   registrarElemento(){
     let data = {
@@ -66,11 +66,11 @@ export class ListarElementosComponent implements OnInit {
       this.listarPersonas(0);
       //window.location.reload()
     })
-    
+
   }
 
   listarPersonas( desde:any, criterio:any = ""){
-    
+
     this.elementoService.listarElementos(desde,criterio).subscribe((resp:any) =>{
       setTimeout(() => {
       this.elementos = resp.elementos;
@@ -81,7 +81,7 @@ export class ListarElementosComponent implements OnInit {
       this.idElemento = '';
       this.mostrar = false;
       }, 500);
-        
+
     })
 
   }
@@ -98,7 +98,7 @@ export class ListarElementosComponent implements OnInit {
       confirmButtonText: "Eliminar"
     }).then( async(result) => {
       if (result.isConfirmed) {
-       
+
          await this.elementoService.eliminarElemento(this.idElemento).subscribe((resp:any) =>{
           Swal.fire({
             title: "Elemento eliminado!",
@@ -107,21 +107,21 @@ export class ListarElementosComponent implements OnInit {
           });
            // Refrezca el listado
        this.listarPersonas(0,this.criterioBusquedaP);
-       
+
        this.desde = 0;
        this.mostrarBtnSiguientes = true;
          })
-        
+
       }
     });
 
   }
   // COMPLETA LOS CAMPOS DEL FORMULARIO EDITAR PERSONAS
   FormeditarElemento(nombre:any, id:any, dniPersona:any){
-    
+
     this.nElemento = nombre;
     this.idElemento = id;
-    
+
 
     this.listarElementos(0)
 /*
@@ -130,7 +130,7 @@ export class ListarElementosComponent implements OnInit {
       this.carrerasSeleccionadas = this.persona.carrera.map((item:any) => item._id);
     })
     */
-    
+
   }
 
   /*
@@ -141,27 +141,27 @@ export class ListarElementosComponent implements OnInit {
       dni: this.dniPersona,
       carrera: this.carrerasSeleccionadas
      }
-    
+
     this.personaService.editarPersona(data).subscribe((resp:any) =>{
       // Alerta de bienvenida
       Swal.fire('Success', resp.msg, 'success');
-      
+
       // Navegar al Dashboard
        this.listarPersonas(0,this.criterioBusquedaP);
 
-       
-    })  
-    
+
+    })
+
   }
   */
-  
-  // FUNCION PARA BUSCAR PERSONAS Y MOSTRAR RESULTADOS EN TABLA 
+
+  // FUNCION PARA BUSCAR PERSONAS Y MOSTRAR RESULTADOS EN TABLA
 
   buscarPersonas(term: string):void {
 
     console.log(term);
     this.listarPersonas(0,term);
-  
+
   }
  /*
   // FUNCION PARA PAGINAR LA TABLA
@@ -192,20 +192,20 @@ export class ListarElementosComponent implements OnInit {
     if(this.desde + 5 == this.totalPersonas){
       this.mostrarBtnSiguientes = false;
     }
-    
-    this.listarPersonas(this.desde, this.criterioBusquedaP); 
+
+    this.listarPersonas(this.desde, this.criterioBusquedaP);
   }*/
 
   // FUNCION QUE CARGA EL LISTADO DE CARRERAS PARA LOS FORMULARIOS EDITAR Y NUEVA PERSONA
   listarElementos( desde:any, criterio:any = ""){
-    
+
     this.elementoService.listarElementos(desde,criterio).subscribe((resp:any) =>{
-    
+
     this.elementos = resp.elementos;
-    
-      
+
+
   })
- 
+
 }
 // FUNCION QUE RESETEA EL FORMULARIO AL CANCELARLO
 cancelarFormulario(){
@@ -225,7 +225,7 @@ cancelarFormulario(){
     this.personas = resp.personas
     console.log("llegó al final" + resp)
   })
-  
+
 }*/
 
 

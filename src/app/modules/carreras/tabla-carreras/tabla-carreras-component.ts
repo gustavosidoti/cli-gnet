@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarrerasService } from 'src/app/services/carreras.service';
 import { PagesActiveService } from 'src/app/services/pages-active.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-listar-carreras',
-  templateUrl: './listar-carreras.component.html',
-  styleUrls: ['./listar-carreras.component.css']
+  selector: 'app-tabla-carreras',
+  templateUrl: './tabla-carreras.component.html',
+
 })
-export class ListarCarrerasComponent implements OnInit {
+export class TablaCarrerasComponent implements OnInit {
+
+  @Input() carreras: any[] = []; // Asegúrate de definir el tipo correcto
+  @Input() totalCarreras: number = 0;
+  @Input() mostrar: boolean = false;
+
+  // output para que se edite una carrera seleccionada
+  @Output() editarCarrera = new EventEmitter<{ nombreCarrera: any; id: any }>();
 
 
-
-  public totalCarreras: number = 0;
-  carreras:any = [];
   public desde: number = 0;
   mostrarBtnSiguientes: boolean = true;
   mostrarBtnAnteriores: boolean = false;
@@ -24,7 +28,7 @@ export class ListarCarrerasComponent implements OnInit {
               public carreraService: CarrerasService,
               public router: Router) { }
 
-  mostrar: boolean = true;
+
   nCarrera:any='';
   idCarrera:any;
   criterioBusqueda:any='';
@@ -130,46 +134,14 @@ export class ListarCarrerasComponent implements OnInit {
 
   }
 
- formeditarCarrera(CarreraRecibida:{nombreCarrera:any; id:any}){
-    this.nCarrera = CarreraRecibida.nombreCarrera;
-    this.idCarrera = CarreraRecibida.id;
-  }
-
-  editarCarrera(){
-    let data = {
-      id : this.idCarrera,
-      nombreCarrera : this.nCarrera
-    }
-
-    this.carreraService.editarCarrera(data).subscribe((resp:any) =>{
-      // Alerta de bienvenida
-      Swal.fire('Success', resp.msg, 'success');
-
-      // Navegar al Dashboard
-       this.listarCarreras(0,this.criterioBusqueda);
-
-       this.nCarrera = '';
-    })
-  }
+  // COMPLETA LOS CAMPOS DEL FORMULARIO EDITAR PERSONAS
+ FormeditarCarreraAca(nombreCarrera:any, id:any){
 
 
-
-  // FUNCION PARA BUSCAR PERSONAS Y MOSTRAR RESULTADOS EN TABLA
-
-  buscarCarreras(term: any):void {
-
-    this.listarCarreras(0,term);
-
-  }
-
-  // Método que recibe la persona agregada desde el hijo y refrezca la tabla
-  agregarCarrera(nuevaCarrera:{ nCarrera: any, idCarrera: any })
-  {
-
-    this.listarCarreras(0,"");
-  }
+  this.editarCarrera.emit({nombreCarrera, id});
 
 
 }
 
 
+}

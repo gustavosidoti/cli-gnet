@@ -1,173 +1,87 @@
 <!-- TABLA DE CARRERAS CON BUSCADOR -->
 <section class="section">
-    <div class="row" id="table-striped">
-        <div class="col-12">
-            <div class="card">
+  <div class="row" id="table-striped">
+    <div class="col-12">
+      <div class="card">
 
-                <div class="card-content">
-
-
-                    <app-buscador-carreras (buscarCarrera)="buscarCarreras($event)"></app-buscador-carreras>
+        <div class="card-content">
 
 
+          <app-buscador-carreras (buscarCarrera)="buscarCarreras($event)"></app-buscador-carreras>
 
 
-
-
-
-
-                    <div class="row" *ngIf="mostrar">
-                        <div class="col-12">
-                            <div class="alert alert-info text-center">
-                                <h4 class="alert-heading">Cargando</h4>
-                                <div class="spinner-border text-light" role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                                <p class="mb-0">Por favor espere</p>
-                            </div>
-                        </div>
-                    </div>
-                <!-- DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
-                <div *ngIf="carreras.length > 0">
-                    <div class="row" *ngIf="mostrar == false">
-                        <div class="col-12">
-                            <button class="btn btn-success" data-bs-toggle="modal"
-                            data-bs-target="#inlineForm">
-                                <i class="bi bi-plus-circle"></i>
-                                Agregar Carrera</button>
-                        </div>
-                    </div>
-                     <!--login form Modal -->
-                     <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
-                     aria-labelledby="myModalLabel33" aria-hidden="true">
-                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                         role="document">
-                         <div class="modal-content">
-                             <div class="modal-header">
-                                 <h4 class="modal-title" id="myModalLabel33">Agregar una carrera </h4>
-                                 <button type="button" class="close" data-bs-dismiss="modal"
-                                     aria-label="Close">
-                                     <i data-feather="x"></i>
-                                 </button>
-                             </div>
-                             <form action="#">
-                                 <div class="modal-body">
-                                     <label>Nombre de la carrera: </label>
-                                     <div class="form-group">
-                                         <input type="text" placeholder="Nombre" name="nCarrera"
-                                             [(ngModel)]="nCarrera"
-                                             class="form-control">
-                                     </div>
-                                 </div>
-                                 <div class="modal-footer">
-                                     <button type="button" class="btn btn-light-secondary"
-                                         data-bs-dismiss="modal">
-                                         <i class="bx bx-x d-block d-sm-none"></i>
-                                         <span class="d-none d-sm-block">Close</span>
-                                     </button>
-                                     <button type="button" class="btn btn-primary ml-1"
-                                         data-bs-dismiss="modal" (click)="registrarCarrera()" >
-                                         <i class="bx bx-check d-block d-sm-none"></i>
-                                         <span class="d-none d-sm-block">Guardar</span>
-                                     </button>
-                                 </div>
-                             </form>
-                         </div>
-                     </div>
-                 </div>
-
-                    <!-- table striped -->
-
-
-
-                    <div class="table-responsive">
-                        <table class="table table-striped mb-0">
-                            <thead>
-                                <tr>
-                                    <th>Carrera</th>
-                                    <th>Acción</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let carrera of carreras">
-                                   <td>{{carrera.nombreCarrera}}</td>
-                                    <td>
-                                        <div class="buttons">
-                                            <a (click)="FormeditarCarrera(carrera.nombreCarrera, carrera._id)" class="btn icon btn-warning" data-bs-toggle="modal"
-                                            data-bs-target="#editForm"> <i class="bi bi-pencil-square"></i></a>
-                                            <a (click)="eliminar(carrera._id)" class="btn icon btn-danger"><i class="bi bi-trash"></i></a>
-
-                                                        <!--login form Modal -->
-                                                        <div class="modal fade text-left" id="editForm" tabindex="-1" role="dialog"
-                                                        aria-labelledby="myModalLabel33" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                                                            role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title" id="myModalLabel33">Editar carrera </h4>
-                                                                    <button type="button" class="close" data-bs-dismiss="modal"
-                                                                        aria-label="Close">
-                                                                        <i data-feather="x"></i>
-                                                                    </button>
-                                                                </div>
-                                                                <form action="#">
-                                                                    <div class="modal-body">
-                                                                        <label>Nombre de la carrera: </label>
-                                                                        <div class="form-group">
-                                                                            <input type="text" placeholder="Nombre" name="nCarrera"
-                                                                                [(ngModel)]="nCarrera"
-                                                                                class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-light-secondary"
-                                                                            data-bs-dismiss="modal">
-                                                                            <i class="bx bx-x d-block d-sm-none"></i>
-                                                                            <span class="d-none d-sm-block">Cerrar</span>
-                                                                        </button>
-                                                                        <button type="button" class="btn btn-primary ml-1"
-                                                                            data-bs-dismiss="modal" (click)="editarCarrera()" >
-                                                                            <i class="bx bx-check d-block d-sm-none"></i>
-                                                                            <span class="d-none d-sm-block">Editar</span>
-                                                                        </button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Fin modal-->
-
-                                        </div>
-
-                                    </td>
-
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <br>
-                    <button [ngClass]=" desde < 5 ? 'btn disabled' : ''" (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button>
-                    &nbsp;
-                    <button [ngClass]=" this.carreras.length < 5 ? 'btn disabled' : ''" (click)="cambiarPagina(5)" class="btn btn-secondary">Siguientes</button>
-                    <!--
-                    <button [ngClass]=" desde < 5 ? 'btn disabled' : ''" (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button>
-                    &nbsp;
-                    <button [ngClass]=" !mostrarBtnSiguientes ? 'btn disabled' : ''" (click)="cambiarPagina(5)" class="btn btn-secondary">Siguientes</button>
-                    -->
+          <div class="row" *ngIf="mostrar">
+            <div class="col-12">
+              <div class="alert alert-info text-center">
+                <h4 class="alert-heading">Cargando</h4>
+                <div class="spinner-border text-light" role="status">
+                  <span class="visually-hidden">Loading...</span>
                 </div>
-                <!-- FIN DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
-                </div>
-
-                <div *ngIf="carreras.length === 0" class="alert alert-warning text-center">
-                    No hay registros para mostrar
-                </div>
-
+                <p class="mb-0">Por favor espere</p>
+              </div>
             </div>
+          </div>
+
+          <!--BOTÓN AGREGAR -->
+          <app-agregar-carreras [mostrar]="mostrar" (carreraAgregada)="agregarCarrera($event)"></app-agregar-carreras>
+
+          <!-- table striped -->
+          <!-- INICIO DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
+          <app-tabla-carreras [carreras]="carreras" (editarCarrera)="formeditarCarrera($event)"></app-tabla-carreras>
+          <!-- FIN DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
+
+
         </div>
+        <!-- FIN DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
+      </div>
+
+      <div *ngIf="carreras.length === 0" class="alert alert-warning text-center">
+        No hay registros para mostrar
+      </div>
+
     </div>
+  </div>
+
 </section>
 
 <!-- Striped rows end -->
+
+<!--login form Modal -->
+<div class="modal fade text-left" id="editFormC" tabindex="-1" role="dialog"
+aria-labelledby="myModalLabel33" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+    role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel33">Editar carrera </h4>
+            <button type="button" class="close" data-bs-dismiss="modal"
+                aria-label="Close">
+                <i data-feather="x"></i>
+            </button>
+        </div>
+        <form action="#">
+            <div class="modal-body">
+                <label>Nombre de la carrera: </label>
+                <div class="form-group">
+                    <input type="text" placeholder="Nombre" name="nCarrera"
+                        [(ngModel)]="nCarrera"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-secondary"
+                    data-bs-dismiss="modal">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Cerrar</span>
+                </button>
+                <button type="button" class="btn btn-primary ml-1"
+                    data-bs-dismiss="modal" (click)="editarCarrera()" >
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Editar</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<!-- Fin modal-->

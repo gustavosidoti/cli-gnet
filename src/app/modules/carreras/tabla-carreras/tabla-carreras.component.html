@@ -1,0 +1,41 @@
+<div class="table-responsive">
+  <table class="table table-striped mb-0">
+    <thead>
+      <tr>
+        <th>Carrera</th>
+        <th>Acción</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let carrera of carreras">
+        <td>{{carrera.nombreCarrera}}</td>
+        <td>
+          <div class="buttons">
+
+            <a (click)="FormeditarCarreraAca(carrera.nombreCarrera, carrera._id)" class="btn icon btn-warning"
+              data-bs-toggle="modal" data-bs-target="#editFormC"> <i class="bi bi-pencil-square"></i></a>
+            <a (click)="eliminar(carrera._id)" class="btn icon btn-danger"><i class="bi bi-trash"></i></a>
+
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<br>
+<button [ngClass]=" desde < 5 ? 'btn disabled' : ''" (click)="cambiarPagina(-5)"
+  class="btn btn-secondary">Anteriores</button>
+&nbsp;
+<button [ngClass]=" this.carreras.length < 5 ? 'btn disabled' : ''" (click)="cambiarPagina(5)"
+  class="btn btn-secondary">Siguientes</button>
+<!--
+<button [ngClass]=" desde < 5 ? 'btn disabled' : ''" (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button>
+&nbsp;
+<button [ngClass]=" !mostrarBtnSiguientes ? 'btn disabled' : ''" (click)="cambiarPagina(5)" class="btn btn-secondary">Siguientes</button>
+-->

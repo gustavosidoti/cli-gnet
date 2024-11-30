@@ -6,7 +6,6 @@ import { PersonasComponent } from './personas.component';
 import { BuscadorPersonasComponent } from './buscador-personas/buscador-personas.component';
 import { AgregarPersonasComponent } from './agregar-personas/agregar-personas.component';
 import { ListarPersonasComponent } from './listar-personas/listar-personas.component';
-import { EditarPersonasComponent } from './editar-personas/editar-personas.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TablaPersonasComponent } from './tabla-personas/tabla-personas.component';
 
@@ -17,7 +16,6 @@ import { TablaPersonasComponent } from './tabla-personas/tabla-personas.componen
     AgregarPersonasComponent,
     ListarPersonasComponent,
     BuscadorPersonasComponent,
-    EditarPersonasComponent,
     TablaPersonasComponent
   ],
   imports: [

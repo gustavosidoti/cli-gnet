@@ -40,8 +40,6 @@ export class TablaPersonasComponent {
 ngOnInit(): void {
 
 this.pageActive.paginaActiva(9);
-//this.listarPersonas(0)
-//this.listarCarreras(0)
 
 
 }
@@ -111,9 +109,6 @@ listarCarreras( desde:any, criterio:any = ""){
 // COMPLETA LOS CAMPOS DEL FORMULARIO EDITAR PERSONAS
  FormeditarPersona(id:string){
 
-  //this.nPersona = this.nombre;
- // this.idPersona = this.id;
-  //this.dniPersona = this.dniPersona;
   this.editarPersona.emit(id);
 
 
@@ -121,8 +116,6 @@ listarCarreras( desde:any, criterio:any = ""){
 
 // Funcion eliminar
 async eliminar( id:any){
-
-  // await this.FormeditarPersona('', id, '');
 
    Swal.fire({
      title: "Quieres eliminar esta Persona?",
