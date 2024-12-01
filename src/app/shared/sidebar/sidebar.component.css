@@ -5,3 +5,38 @@
 .nav-primary.active {
    color : "white";
 }
+
+/* Estilo base del sidebar */
+#sidebar {
+  width: 250px;
+  transition: all 0.3s ease-in-out;
+}
+
+#sidebar.active {
+  transform: translateX(0);
+}
+
+#sidebar:not(.active) {
+  transform: translateX(-100%);
+}
+
+.burger-btn {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1050;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@media (min-width: 1200px) {
+  #sidebar {
+      transform: translateX(0);
+  }
+
+  .burger-btn {
+      display: none;
+  }
+}

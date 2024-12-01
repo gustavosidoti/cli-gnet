@@ -1,5 +1,5 @@
 <!-- DIV QUE ENGLOBA TABLA + BOTONES DE NAVEGACION  -->
-<div *ngIf="personas.length > 0">
+
 
 
   <!-- table striped -->
@@ -43,8 +43,12 @@
   </div>
 
   <br>
-  <button [ngClass]=" desde < 5 ? 'btn disabled' : ''" (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button>
-  &nbsp;
-  <button [ngClass]=" this.personas.length < 5 || (desde + 5) === totalPersonas ? 'btn disabled' : ''" (click)="cambiarPagina(5)" class="btn btn-secondary">Siguientes</button>
+   <!-- Botones de paginación -->
+<button [disabled]="desde === 0" (click)="cambiarPagina(-1)" class="btn btn-secondary">
+  Anteriores
+</button>
+&nbsp;
+<button [disabled]="!mostrarBtnSiguientes" (click)="cambiarPagina(1)" class="btn btn-secondary">
+  Siguientes
+</button>
 
-</div>

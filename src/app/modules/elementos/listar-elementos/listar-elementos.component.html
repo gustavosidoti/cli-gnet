@@ -1,2 +1,119 @@
 
 
+<!-- TABLA DE CARRERAS CON BUSCADOR -->
+<section class="section">
+  <div class="row" id="table-striped">
+    <div class="col-12">
+      <div class="card">
+
+        <div class="card-content">
+
+
+          <app-buscador-elementos (buscarElemento)="buscarElementos($event)"></app-buscador-elementos>
+
+
+          <div class="row" *ngIf="mostrar">
+            <div class="col-12">
+              <div class="alert alert-info text-center">
+                <h4 class="alert-heading">Cargando</h4>
+                <div class="spinner-border text-light" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mb-0">Por favor espere</p>
+              </div>
+            </div>
+          </div>
+
+          <!--BOTÓN AGREGAR -->
+          <app-agregar-elementos [mostrar]="mostrar" (elementoAgregado)="agregarElemento($event)"></app-agregar-elementos>
+
+          <!-- table striped -->
+          <!-- INICIO DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
+          <app-tabla-elementos [elementos]="elementos" (editarElemento)="formeditarElemento($event)" (elementoEliminado)="elementoEliminado($event)"></app-tabla-elementos>
+          <!-- FIN DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
+
+
+        </div>
+        <!-- FIN DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
+      </div>
+
+      <div *ngIf="elementos.length === 0" class="alert alert-warning text-center">
+        No hay registros para mostrar
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- Striped rows end -->
+
+<!--login form Modal -->
+<div class="modal fade text-left" id="editFormC" tabindex="-1" role="dialog"
+aria-labelledby="myModalLabel33" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+    role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel33">Editar Elemento </h4>
+            <button type="button" class="close" data-bs-dismiss="modal"
+                aria-label="Close">
+                <i data-feather="x"></i>
+            </button>
+        </div>
+        <form action="#">
+          <div class="card-content">
+            <div class="card-body">
+                <form class="form">
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="first-name-column">Descripcion</label>
+                                <input type="text" id="descripcion" class="form-control"
+                                    placeholder="Descripción" name="descripcion" [(ngModel)]="descripcion">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="last-name-column">Número de Elemento</label>
+                                <input type="text" id="nroElemento" class="form-control"
+                                    placeholder="Número de Elemento" name="nroElemento" [(ngModel)]="nroElemento">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="city-column">Marca</label>
+                                <input type="text" id="marca" class="form-control" placeholder="Marca"
+                                    name="marca" [(ngModel)]="marca">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="country-floating">Modelo</label>
+                                <input type="text" id="modelo" class="form-control"
+                                    name="modelo" placeholder="Modelo" [(ngModel)]="modelo" >
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-secondary"
+                    data-bs-dismiss="modal">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Cerrar</span>
+                </button>
+                <button type="button" class="btn btn-primary ml-1"
+                    data-bs-dismiss="modal" (click)="editarElemento()" >
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Editar</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<!-- Fin modal-->

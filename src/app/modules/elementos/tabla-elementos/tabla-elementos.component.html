@@ -1,0 +1,49 @@
+
+
+  <div class="table-responsive">
+    <table class="table table-striped mb-0">
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Número</th>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Acción</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let elemento of elementos">
+          <td>{{elemento.descripcion}}</td>
+          <td>{{elemento.nro}}</td>
+          <td>{{elemento.marca}}</td>
+          <td>{{elemento.modelo}}</td>
+          <td>
+            <div class="buttons">
+
+              <a (click)="FormeditarElementoAca(elemento._id, elemento.descripcion, elemento.nro, elemento.marca, elemento.modelo)" class="btn icon btn-warning"
+                data-bs-toggle="modal" data-bs-target="#editFormC"> <i class="bi bi-pencil-square"></i></a>
+              <a (click)="eliminar(elemento._id)" class="btn icon btn-danger"><i class="bi bi-trash"></i></a>
+
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+  <!-- Botones de paginación -->
+<button [disabled]="desde === 0" (click)="cambiarPagina(-1)" class="btn btn-secondary">
+  Anteriores
+</button>
+&nbsp;
+<button [disabled]="!mostrarBtnSiguientes" (click)="cambiarPagina(1)" class="btn btn-secondary">
+  Siguientes
+</button>
+
+

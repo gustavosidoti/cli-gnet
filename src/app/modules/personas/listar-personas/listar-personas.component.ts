@@ -43,7 +43,7 @@ export class ListarPersonasComponent implements OnInit {
 
     this.pageActive.paginaActiva(9);
     this.listarPersonas(0)
-    this.listarCarreras(0)
+    this.listarTodasCarreras()
 
 
   }
@@ -68,9 +68,9 @@ export class ListarPersonasComponent implements OnInit {
   }
 
   // FUNCION QUE CARGA EL LISTADO DE CARRERAS PARA LOS FORMULARIOS EDITAR Y NUEVA PERSONA
-  listarCarreras( desde:any, criterio:any = ""){
+  listarTodasCarreras( ){
 
-    this.carreraService.listarCarreras(desde,criterio).subscribe((resp:any) =>{
+    this.carreraService.listarTodasCarreras().subscribe((resp:any) =>{
 
     this.carreras = resp.carreras;
 
@@ -152,7 +152,7 @@ export class ListarPersonasComponent implements OnInit {
       this.carrerasSeleccionadas = [];
       this.carreras = [];
 
-      this.listarCarreras(0);
+      this.listarTodasCarreras();
     }
 
 

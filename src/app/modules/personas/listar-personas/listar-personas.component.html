@@ -22,7 +22,7 @@
                 <!--BOTÓN AGREGAR -->
                   <app-agregar-personas [mostrar]="mostrar" (personaAgregada)="agregarPersona($event)"></app-agregar-personas>
                 <!-- INICIO DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
-                <app-tabla-personas [personas]="personas" (editarPersona)="FormeditarPersona($event)"></app-tabla-personas>
+                <app-tabla-personas [personas]="personas" [totalPersonas]="totalPersonas" (editarPersona)="FormeditarPersona($event)"></app-tabla-personas>
                 <!-- FIN DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
                 </div>
                 <br>

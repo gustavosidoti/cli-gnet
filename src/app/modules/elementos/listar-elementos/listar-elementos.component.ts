@@ -11,74 +11,43 @@ import { ElementosService } from 'src/app/services/elementos.service';
 })
 export class ListarElementosComponent implements OnInit {
 
-  // conexion api
-  public totalelementos: number = 0;
-  elementos:any[] = [];
-  elemento:any;
-
-  // paginacion
+  public totalElementos: number = 0;
+  elementos:any = [];
   public desde: number = 0;
   mostrarBtnSiguientes: boolean = true;
   mostrarBtnAnteriores: boolean = false;
-  mostrar: boolean = true;
-  totalElementos:any;
-
-  // formulario
-  nElemento:any='';
-  idElemento:any;
-
-
-  // para busquedas
-  criterioBusquedaP:any='';
-  opcionSeleccionada: string = '';
-
 
 
   constructor(public pageActive: PagesActiveService,
-              public elementoService: ElementosService,
+              public elementosService: ElementosService,
               public router: Router) { }
+
+  mostrar: boolean = true;
+
+  // Formularios de Elementos
+  descripcion:string='';
+  idElemento:any;
+  nroElemento:any;
+  marca:string;
+  modelo:string;
+  estado:boolean;
+
+  // buscador
+  criterioBusqueda:any='';
 
   ngOnInit(): void {
 
     this.pageActive.paginaActiva(8);
-
+    this.listarElementos(0)
   }
 
+  listarElementos( desde:any, criterio:any = ""){
 
-
-  registrarElemento(){
-    let data = {
-     nombre: this.nElemento,
-     idElemento: this.idElemento,
-    }
-    this.elementoService.agregarElemento(data).subscribe( (resp:any) => {
-      // Alerta de bienvenida
-      Swal.fire('Success', resp.msg, 'success');
-
-      this.nElemento = '';
-      this.idElemento = '';
-      this.mostrarBtnSiguientes = true;
-      this.desde = 0;
-      this.elementos = [];
-      // Trae nuevamente los elementos
-      //this.listarElementos(0);
-      // Refrezca la tabla
-      this.listarPersonas(0);
-      //window.location.reload()
-    })
-
-  }
-
-  listarPersonas( desde:any, criterio:any = ""){
-
-    this.elementoService.listarElementos(desde,criterio).subscribe((resp:any) =>{
+    this.elementosService.listarElementos(desde,criterio).subscribe((resp:any) =>{
       setTimeout(() => {
       this.elementos = resp.elementos;
-      this.totalElementos = resp.cantidadElementos;
-
-      // ESTABLECE VALORES A ESTAS VARIABLES PARA INICIALIZAR
-      this.nElemento = '';
-      this.idElemento = '';
+      //this.totalElementos = resp.cant;
+      console.log(resp);
       this.mostrar = false;
       }, 500);
 
@@ -86,147 +55,60 @@ export class ListarElementosComponent implements OnInit {
 
   }
 
-  async eliminar( id:any){
-    await this.FormeditarElemento('', id, '');
-    Swal.fire({
-      title: "Quieres eliminar esta Persona?",
-      text: "Al eliminar, no podrás reestablecer este cambio",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Eliminar"
-    }).then( async(result) => {
-      if (result.isConfirmed) {
-
-         await this.elementoService.eliminarElemento(this.idElemento).subscribe((resp:any) =>{
-          Swal.fire({
-            title: "Elemento eliminado!",
-            text: "El elemento se ha eliminado con éxito.",
-            icon: "success"
-          });
-           // Refrezca el listado
-       this.listarPersonas(0,this.criterioBusquedaP);
-
-       this.desde = 0;
-       this.mostrarBtnSiguientes = true;
-         })
-
-      }
-    });
-
-  }
-  // COMPLETA LOS CAMPOS DEL FORMULARIO EDITAR PERSONAS
-  FormeditarElemento(nombre:any, id:any, dniPersona:any){
-
-    this.nElemento = nombre;
-    this.idElemento = id;
 
 
-    this.listarElementos(0)
-/*
-    this.elementoService.listarElementoById(this.idPersona).subscribe((resp:any) =>{
-      this.persona = resp.persona;
-      this.carrerasSeleccionadas = this.persona.carrera.map((item:any) => item._id);
-    })
-    */
-
+ formeditarElemento(ElementoRecibido:any){
+   this.idElemento = ElementoRecibido.id;
+   this.descripcion = ElementoRecibido.descripcion;
+   this.nroElemento = ElementoRecibido.nro;
+   this.marca = ElementoRecibido.marca;
+   this.modelo = ElementoRecibido.modelo;
   }
 
-  /*
-  editarPersona(){
+  editarElemento(){
     let data = {
-      id: this.idPersona,
-      nombre: this.nPersona,
-      dni: this.dniPersona,
-      carrera: this.carrerasSeleccionadas
-     }
+      id: this.idElemento,
+      descripcion : this.descripcion,
+      nro : this.nroElemento,
+      marca : this.marca,
+      modelo : this.modelo,
+      estado : true
+    }
 
-    this.personaService.editarPersona(data).subscribe((resp:any) =>{
+    this.elementosService.editarElemento(data).subscribe((resp:any) =>{
       // Alerta de bienvenida
       Swal.fire('Success', resp.msg, 'success');
 
       // Navegar al Dashboard
-       this.listarPersonas(0,this.criterioBusquedaP);
+       this.listarElementos(0,this.criterioBusqueda);
 
-
+       this.descripcion = '';
+      this.nroElemento = '';
+      this.marca = '';
+      this.modelo = '';
     })
-
   }
-  */
+
+
 
   // FUNCION PARA BUSCAR PERSONAS Y MOSTRAR RESULTADOS EN TABLA
 
-  buscarPersonas(term: string):void {
+  buscarElementos(term: any):void {
 
-    console.log(term);
-    this.listarPersonas(0,term);
+    this.listarElementos(0,term);
 
   }
- /*
-  // FUNCION PARA PAGINAR LA TABLA
-  cambiarPagina( valor: number){
 
-    this.desde += valor;
-    this.mostrarBtnSiguientes = true;
+  // Método que recibe la persona agregada desde el hijo y refrezca la tabla
+  agregarElemento(nuevaCarrera:{ nCarrera: any, idCarrera: any })
+  {
 
-    if ( this.desde < 0) {
-      this.desde = 0;
-    } else if ( this.desde >= this.totalPersonas ) {
-      this.desde -= valor;
-      this.mostrarBtnSiguientes = false;
-    }
+    this.listarElementos(0,"");
+  }
 
-    if(this.desde + 1 == this.totalPersonas) {
-      this.mostrarBtnSiguientes = false;
-    }
-    if(this.desde + 2 == this.totalPersonas){
-      this.mostrarBtnSiguientes = false;
-    }
-    if(this.desde + 3 == this.totalPersonas){
-      this.mostrarBtnSiguientes = false;
-    }
-    if(this.desde + 4 == this.totalPersonas){
-      this.mostrarBtnSiguientes = false;
-    }
-    if(this.desde + 5 == this.totalPersonas){
-      this.mostrarBtnSiguientes = false;
-    }
-
-    this.listarPersonas(this.desde, this.criterioBusquedaP);
-  }*/
-
-  // FUNCION QUE CARGA EL LISTADO DE CARRERAS PARA LOS FORMULARIOS EDITAR Y NUEVA PERSONA
-  listarElementos( desde:any, criterio:any = ""){
-
-    this.elementoService.listarElementos(desde,criterio).subscribe((resp:any) =>{
-
-    this.elementos = resp.elementos;
-
-
-  })
-
-}
-// FUNCION QUE RESETEA EL FORMULARIO AL CANCELARLO
-cancelarFormulario(){
-   this.nElemento = "";
-   this.idElemento = "";
-   //this.carrerasSeleccionadas = [];
-   this.elementos = [];
-
-   this.listarElementos(0);
-}
-
-/*busquedaPorCarrera( nombreCarrera? : any){
-
-  console.log(nombreCarrera);
-
-  this.personaService.listarPersonasPorCarrera(0,nombreCarrera).subscribe((resp:any) => {
-    this.personas = resp.personas
-    console.log("llegó al final" + resp)
-  })
-
-}*/
+  elementoEliminado(_id:any){
+    this.listarElementos(0,"");
+  }
 
 
 

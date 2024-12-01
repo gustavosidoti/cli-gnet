@@ -17,7 +17,7 @@ export class CarrerasService {
 
     get token(){
     return localStorage.getItem('token') || '';
-    
+
     }
 
     get headers() {
@@ -33,25 +33,33 @@ export class CarrerasService {
 
     agregarCarrera(data:any){
     const url = `${ base_url }/carreras`;
-    
+
     return this.http.post( url, data ,this.headers );
     }
 
     listarCarreras(desde: number = 0, criterio:string = ''){
 
-      
+
       const url = `${ base_url }/carreras?desde=${desde}&criterio=${criterio}`;
-      
-      return this.http.get( url, this.headers );    
+
+      return this.http.get( url, this.headers );
     }
 
-    
+    listarTodasCarreras(){
+
+
+      const url = `${ base_url }/carreras/todas`;
+
+      return this.http.get( url, this.headers );
+    }
+
+
 
     editarCarrera(data:any){
 
       console.log(data);
       const url = `${ base_url }/carreras/${data.id}`;
-    
+
       return this.http.put( url, data ,this.headers );
     }
 
@@ -59,7 +67,7 @@ export class CarrerasService {
 
       console.log(data);
       const url = `${ base_url }/carreras/delete?id=${data}`;
-    
+
       return this.http.delete( url, this.headers );
     }
 }

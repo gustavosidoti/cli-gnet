@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class TablaPersonasComponent {
   @Input() personas: any[] = []; // Asegúrate de definir el tipo correcto
-  @Input() totalPersonas: number = 0;
+  @Input() totalPersonas:number;
   @Input() mostrar: boolean = false;
 
   // output para que se edite un usuario seleccionado
@@ -21,6 +21,7 @@ export class TablaPersonasComponent {
   mostrarBtnSiguientes: boolean = true;
   mostrarBtnAnteriores: boolean = false;
   criterioBusquedaP:any='';
+
 
   // de formulario editar
   persona:any;
@@ -46,52 +47,39 @@ this.pageActive.paginaActiva(9);
   // Otros métodos como cambiarPagina, eliminar, etc.
 
  // FUNCION PARA PAGINAR LA TABLA
- cambiarPagina( valor: number){
-  console.log(valor);
-  this.desde += valor;
-  this.mostrarBtnSiguientes = true;
+ cambiarPagina(valor: number): void {
+  // Cambiar página
+  const nuevaPagina = this.desde + valor;
 
-  if ( this.desde < 0) {
-    this.desde = 0;
-  } else if ( this.desde >= this.totalPersonas ) {
-    this.desde -= valor;
-    this.mostrarBtnSiguientes = false;
-  }
 
-  if(this.desde + 1 == this.totalPersonas) {
-    this.mostrarBtnSiguientes = false;
-  }
-  if(this.desde + 2 == this.totalPersonas){
-    this.mostrarBtnSiguientes = false;
-  }
-  if(this.desde + 3 == this.totalPersonas){
-    this.mostrarBtnSiguientes = false;
-  }
-  if(this.desde + 4 == this.totalPersonas){
-    this.mostrarBtnSiguientes = false;
-  }
-  if(this.desde + 5 == this.totalPersonas){
-    this.mostrarBtnSiguientes = false;
+  console.log('paso por acá');
+  // Evitar que se pase de los límites
+  if (nuevaPagina < 0 || nuevaPagina >= Math.ceil(this.totalPersonas / 5)) {
+      return;
   }
 
-  this.listarPersonas(this.desde, this.criterioBusquedaP);
+  this.desde = nuevaPagina;
+
+  // Actualizar la lista de personas
+  this.listarPersonas(this.desde * 5, this.criterioBusquedaP);
 }
 
 
-listarPersonas( desde:any, criterio:any = ""){
+listarPersonas(desde: number, criterio: string = ""): void {
+this.mostrar = true; // Mostrar indicador de carga (opcional)
 
-  this.personaService.listarPersonas(desde,criterio).subscribe((resp:any) =>{
-
+this.personaService.listarPersonas(desde, criterio).subscribe((resp: any) => {
     this.personas = resp.personas;
     this.totalPersonas = resp.cantidadPersonas;
 
-    // ESTABLECE VALORES A ESTAS VARIABLES PARA INICIALIZAR
+    // Actualizar el estado de los botones
+    this.mostrarBtnSiguientes = (this.desde + 1) * 5 < this.totalPersonas;
+    this.mostrarBtnAnteriores = this.desde > 0;
 
-    this.mostrar = false;
+    console.log(desde);
 
-
-  })
-
+    this.mostrar = false; // Ocultar indicador de carga
+});
 }
 
 // FUNCION QUE CARGA EL LISTADO DE CARRERAS PARA LOS FORMULARIOS EDITAR Y NUEVA PERSONA

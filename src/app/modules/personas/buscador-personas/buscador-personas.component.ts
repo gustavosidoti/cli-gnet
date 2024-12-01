@@ -28,13 +28,13 @@ export class BuscadorPersonasComponent {
     ngOnInit(): void {
 
       this.pageActive.paginaActiva(9);
-      this.listarCarreras(0);
+      this.listarTodasCarreras();
     }
 
         // METODO QUE BUSCA TRAE TODAS LAS CARRERAS
-        listarCarreras( desde:any, criterio:any = ""){
+        listarTodasCarreras(){
 
-          this.carreraService.listarCarreras(desde,criterio).subscribe((resp:any) =>{
+          this.carreraService.listarTodasCarreras().subscribe((resp:any) =>{
           this.carreras = resp.carreras;
         })
 

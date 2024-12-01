@@ -17,7 +17,7 @@ export class ElementosService {
 
     get token(){
     return localStorage.getItem('token') || '';
-    
+
     }
 
     get headers() {
@@ -32,34 +32,34 @@ export class ElementosService {
     }
 
     agregarElemento(data:any){
-    const url = `${ base_url }/carreras`;
-    
+    const url = `${ base_url }/elementos`;
+
     return this.http.post( url, data ,this.headers );
     }
 
     listarElementos(desde: number = 0, criterio:string = ''){
 
-      
-      const url = `${ base_url }/carreras?desde=${desde}&criterio=${criterio}`;
-      
-      return this.http.get( url, this.headers );    
+
+      const url = `${ base_url }/elementos?desde=${desde}&criterio=${criterio}`;
+
+      return this.http.get( url, this.headers );
     }
 
-    
+
 
     editarElemento(data:any){
 
       console.log(data);
-      const url = `${ base_url }/carreras/${data.id}`;
-    
+      const url = `${ base_url }/elementos/${data.id}`;
+
       return this.http.put( url, data ,this.headers );
     }
 
     eliminarElemento(data:any){
 
       console.log(data);
-      const url = `${ base_url }/carreras/delete?id=${data}`;
-    
+      const url = `${ base_url }/elementos/delete?id=${data}`;
+
       return this.http.delete( url, this.headers );
     }
 }

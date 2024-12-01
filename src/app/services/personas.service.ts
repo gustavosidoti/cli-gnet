@@ -16,7 +16,7 @@ export class PersonasService {
 
     get token(){
     return localStorage.getItem('token') || '';
-    
+
     }
 
     get headers() {
@@ -31,17 +31,17 @@ export class PersonasService {
     }
 
     agregarPersona(data:any){
-    const url = `${ base_url }/Personas`;
-    
+    const url = `${ base_url }/personas`;
+
     return this.http.post( url, data ,this.headers );
     }
 
     listarPersonas(desde: number = 0, criterio:string = ''){
 
-      
-      const url = `${ base_url }/Personas?desde=${desde}&criterio=${criterio}`;
-      
-      return this.http.get( url, this.headers );    
+
+      const url = `${ base_url }/personas?desde=${desde}&criterio=${criterio}`;
+
+      return this.http.get( url, this.headers );
     }
 
     listarPersonasPorCarrera(desde: number = 0, carrera:string = ''){
@@ -51,34 +51,34 @@ export class PersonasService {
         id_carrera: carrera
 
       }
-      
-      const url = `${ base_url }/Personas/personacarrera`;
-      
-      return this.http.post( url, data , this.headers );    
+
+      const url = `${ base_url }/personas/personacarrera`;
+
+      return this.http.post( url, data , this.headers );
     }
 
     listarPersonaById(id:any){
-     
-      const url = `${ base_url }/Personas/${id}`;
-      
-      return this.http.get( url, this.headers );    
+
+      const url = `${ base_url }/personas/${id}`;
+
+      return this.http.get( url, this.headers );
     }
 
-    
+
 
     editarPersona(data:any){
 
       console.log(data);
-      const url = `${ base_url }/Personas/${data.id}`;
-    
+      const url = `${ base_url }/personas/${data.id}`;
+
       return this.http.put( url, data ,this.headers );
     }
 
     eliminarPersona(data:any){
 
       console.log(data);
-      const url = `${ base_url }/Personas/delete?id=${data}`;
-    
+      const url = `${ base_url }/personas/delete?id=${data}`;
+
       return this.http.delete( url, this.headers );
     }
 }

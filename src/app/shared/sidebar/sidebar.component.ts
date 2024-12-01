@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, RouterLinkActive } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 import { PagesActiveService } from '../../services/pages-active.service';
@@ -17,17 +17,20 @@ export class SidebarComponent implements OnInit{
                 public router: Router, ) { }
 
   ngOnInit(): void {
-    
+
     this.pageActiveService.currentDataActive.subscribe((resp:any) => {
       this.isActive = resp;
     });
-    
+
   }
 
-  
+
 
   logout(){
     this.usuarioService.logout();
   }
 
+
+
 }
+

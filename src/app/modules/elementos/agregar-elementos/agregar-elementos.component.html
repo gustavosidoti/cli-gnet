@@ -1,1 +1,85 @@
-<p>agregar-elementos works!</p>
+
+
+   <!-- DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
+<div *ngIf="elementos.length >= 0">
+  <div class="row" *ngIf="mostrar == false">
+      <div class="col-12">
+          <button class="btn btn-success" data-bs-toggle="modal"
+          data-bs-target="#inlineForm">
+              <i class="bi bi-plus-circle"></i>
+              Agregar Elemento</button>
+      </div>
+  </div>
+
+   <!--login form Modal -->
+   <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
+   aria-labelledby="myModalLabel33" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+       role="document" >
+       <div class="modal-content">
+           <div class="modal-header">
+               <h4 class="modal-title" id="myModalLabel33">Agregar un Elemento </h4>
+               <button type="button" class="close" data-bs-dismiss="modal"
+                   aria-label="Close">
+                   <i data-feather="x"></i>
+               </button>
+           </div>
+           <form action="#">
+
+
+               <div class="card-content">
+                <div class="card-body">
+                    <form class="form">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="first-name-column">Descripcion</label>
+                                    <input type="text" id="descripcion" class="form-control"
+                                        placeholder="Descripción" name="descripcion" [(ngModel)]="descripcion">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="last-name-column">Número de Elemento</label>
+                                    <input type="text" id="nroElemento" class="form-control"
+                                        placeholder="Número de Elemento" name="nroElemento" [(ngModel)]="nroElemento">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="city-column">Marca</label>
+                                    <input type="text" id="marca" class="form-control" placeholder="Marca"
+                                        name="marca" [(ngModel)]="marca">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="country-floating">Modelo</label>
+                                    <input type="text" id="modelo" class="form-control"
+                                        name="modelo" placeholder="Modelo" [(ngModel)]="modelo" >
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+          <!--Fin de sección de textbox-->
+
+               <div class="modal-footer">
+                   <button type="button" class="btn btn-light-secondary"
+                       data-bs-dismiss="modal">
+                       <i class="bx bx-x d-block d-sm-none"></i>
+                       <span class="d-none d-sm-block">Cerrar</span>
+                   </button>
+                   <button type="button" class="btn btn-primary ml-1"
+                       data-bs-dismiss="modal" (click)="registrarElemento()" >
+                       <i class="bx bx-check d-block d-sm-none"></i>
+                       <span class="d-none d-sm-block">Guardar</span>
+                   </button>
+               </div>
+           </form>
+       </div>
+   </div>
+</div>
