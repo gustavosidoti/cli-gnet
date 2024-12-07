@@ -1,1 +1,16 @@
-<p>reparaciones-finalizadas works!</p>
+<div class="datepicker-container">
+  <mat-form-field appearance="outline">
+    <mat-label>Selecciona una fecha</mat-label>
+    <input matInput [matDatepicker]="pickerDesde" [(ngModel)]="selectedDate">
+    <mat-datepicker-toggle matSuffix [for]="pickerDesde"></mat-datepicker-toggle>
+    <mat-datepicker #pickerDesde></mat-datepicker>
+  </mat-form-field>
+</div>
+<div class="datepicker-container">
+  <mat-form-field appearance="outline">
+    <mat-label>Selecciona fecha hasta</mat-label>
+    <input matInput [matDatepicker]="pickerHasta" [(ngModel)]="selectedDate2">
+    <mat-datepicker-toggle matSuffix [for]="pickerHasta"></mat-datepicker-toggle>
+    <mat-datepicker #pickerHasta></mat-datepicker>
+  </mat-form-field>
+</div>

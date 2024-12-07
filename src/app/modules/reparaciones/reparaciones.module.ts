@@ -2,16 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ReparacionesRoutingModule } from './reparaciones-routing.module';
-import { EditarReparacionesComponent } from './editar-reparaciones/editar-reparaciones.component';
 import { AgregarReparacionesComponent } from './agregar-reparaciones/agregar-reparaciones.component';
 import { ListarReparacionesComponent } from './listar-reparaciones/listar-reparaciones.component';
 import { ReparacionesComponent } from './reparaciones.component';
 import { ReparacionesFinalizadasComponent } from './reparaciones-finalizadas/reparaciones-finalizadas.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    EditarReparacionesComponent,
     AgregarReparacionesComponent,
     ListarReparacionesComponent,
     ReparacionesComponent,
@@ -19,7 +21,16 @@ import { ReparacionesFinalizadasComponent } from './reparaciones-finalizadas/rep
   ],
   imports: [
     CommonModule,
-    ReparacionesRoutingModule
-  ]
+    ReparacionesRoutingModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers: [
+
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' } // Cambiar el idioma si es necesario
+  ],
 })
 export class ReparacionesModule { }
