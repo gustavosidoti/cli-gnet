@@ -1,1 +1,125 @@
-<p>listar-reparaciones works!</p>
+<!-- TABLA DE CARRERAS CON BUSCADOR -->
+<section class="section">
+  <div class="row" id="table-striped">
+    <div class="col-12">
+      <div class="card">
+
+        <div class="card-content">
+
+
+          <app-buscador-reparaciones (busquedaPorElemento)="buscarReparacionesPorElemento($event)" (buscarPorNroReparacion)="buscarReparacionesPorEstado($event)" (busquedaPorEstado)="buscarReparacionesPorEstado($event)"></app-buscador-reparaciones>
+
+
+          <div class="row" *ngIf="mostrar">
+            <div class="col-12">
+              <div class="alert alert-info text-center">
+                <h4 class="alert-heading">Cargando</h4>
+                <div class="spinner-border text-light" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mb-0">Por favor espere</p>
+              </div>
+            </div>
+          </div>
+
+          <!--BOTÓN AGREGAR -->
+          <div class="row" *ngIf="mostrar == false">
+            <div class="col-12">
+                <button class="btn btn-success" data-bs-toggle="modal"
+                data-bs-target="#inlineForm" (click)="btnAgregarReparacion()">
+                    <i class="bi bi-plus-circle"></i>
+                    Agregar Reparacion</button>
+            </div>
+          </div>
+
+          <!-- table striped -->
+          <!-- INICIO DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
+          <app-tabla-reparaciones [reparaciones]="reparaciones" (editarReparacion)="formeditarReparacion($event)"></app-tabla-reparaciones>
+          <!-- FIN DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
+
+
+        </div>
+        <!-- FIN DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
+      </div>
+
+      <div *ngIf="reparaciones.length === 0" class="alert alert-warning text-center">
+        No hay registros para mostrar
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- Striped rows end -->
+
+<!--login form Modal -->
+<div class="modal fade text-left" id="editFormC" tabindex="-1" role="dialog"
+aria-labelledby="myModalLabel33" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+    role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel33">Editar Reparación </h4>
+            <button type="button" class="close" data-bs-dismiss="modal"
+                aria-label="Close">
+                <i data-feather="x"></i>
+            </button>
+        </div>
+        <form action="#">
+          <div class="card-content">
+            <div class="card-body">
+                <form class="form">
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="first-name-column">Descripcion</label>
+                                <input type="text" id="descripcion" class="form-control"
+                                    placeholder="Descripción" name="descripcion" [(ngModel)]="elemento">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="last-name-column">Descripcion</label>
+                                <input type="text" id="descripcionReparacion" class="form-control"
+                                    placeholder="Desccripción" name="descripcionReparacion" [(ngModel)]="descripcionReparacion">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="city-column">Observaciones</label>
+                                <input type="text" id="observaciones" class="form-control" placeholder="Observaciones"
+                                    name="observaciones" [(ngModel)]="observaciones">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="country-floating">Estado</label>
+                                <input type="text" id="estado" class="form-control"
+                                    name="estado" placeholder="Estado" [(ngModel)]="estado" >
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-secondary"
+                    data-bs-dismiss="modal">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Cerrar</span>
+                </button>
+                <button type="button" class="btn btn-primary ml-1"
+                    data-bs-dismiss="modal" (click)="editarReparacion()" >
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Editar</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<!-- Fin modal-->
+

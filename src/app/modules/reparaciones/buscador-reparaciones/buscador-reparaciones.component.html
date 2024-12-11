@@ -1,0 +1,67 @@
+<div class="card-body">
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="opcion1"
+      [(ngModel)]="opcionSeleccionada">
+    <label class="form-check-label" for="flexRadioDefault1">
+      Buscar por nro de Reparación
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="opcion2"
+      [(ngModel)]="opcionSeleccionada">
+    <label class="form-check-label" for="flexRadioDefault2">
+      Buscar por Elemento
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="opcion3"
+      [(ngModel)]="opcionSeleccionada">
+    <label class="form-check-label" for="flexRadioDefault3">
+      Buscar por rango de fechas
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" value="opcion4"
+      [(ngModel)]="opcionSeleccionada">
+    <label class="form-check-label" for="flexRadioDefault4">
+      Buscar por estado
+    </label>
+  </div>
+</div>
+
+
+
+
+<div class="row" *ngIf="opcionSeleccionada === 'opcion1'">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input type="text" class="form-control" placeholder="Buscar por nro de reparación ..."
+          (keyup.enter)="buscarPorNro( buscadorNro.value)" #buscadorNro name="criterioBusquedaP"
+          [(ngModel)]="criterioBusquedaP" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 mb-4" *ngIf="opcionSeleccionada === 'opcion2'">
+
+  <div class="form-group">
+    <select class="choices form-select" #nombreE (change)="onElementoChange(nombreE.value)">
+      <option value="" disabled selected>Selecciona un Elemento</option>
+      <option *ngFor="let elemento of elementos" [value]="elemento._id">{{elemento.descripcion}}</option>
+
+    </select>
+  </div>
+</div>
+
+<div class="col-md-6 mb-4" *ngIf="opcionSeleccionada === 'opcion4'">
+
+  <div class="form-group">
+    <select class="choices form-select" #Estado (change)="onEstadoRepChange(Estado.value)">
+      <option value="" disabled selected>Selecciona un Estado</option>
+      <option value="En proceso" >En proceso</option>
+      <option value="Esperando repuesto" >Esperando repuesto</option>
+    </select>
+  </div>
+</div>

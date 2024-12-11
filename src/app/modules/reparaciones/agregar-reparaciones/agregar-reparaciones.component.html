@@ -1,46 +1,48 @@
 <section id="multiple-column-form">
-    <div class="row match-height">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Nueva Reparación</h4>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <form class="form">
-                            <div class="row">
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="first-name-column">Elemento</label>
-                                        <input type="text" id="elemento" class="form-control"
-                                            placeholder="Elemento" name="elemento">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="last-name-column">Descripción</label>
-                                        <input type="text" id="descripcion" class="form-control"
-                                            placeholder="descripcion" name="descripcion">
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-12">
-                                    <div class="form-group">
-                                        <label for="city-column">Observaciones</label>
-                                        <input type="text" id="city-column" class="form-control" placeholder="City"
-                                            name="city-column">
-                                    </div>
-                                </div>
-
-
-                                <div class="col-12 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">Guardar</button>
-                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Cancelar</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+  <div class="row match-height">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Nueva Reparación</h4>
         </div>
+        <div class="card-content">
+          <div class="card-body">
+            <form class="form">
+              <div class="row">
+                <div class="col-md-6 col-12">
+                  <div class="form-group">
+                    <label for="last-name-column">Elemento</label>
+                    <select class="choices form-select" name="elemento" [(ngModel)]="elemento">
+                      <option value="" disabled selected>Selecciona un Elemento</option>
+                      <option *ngFor="let elemento of elementos" [value]="elemento._id">{{elemento.descripcion}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6 col-12">
+                  <div class="form-group">
+                    <label for="last-name-column">Descripción</label>
+                    <input type="text" id="descripcion" class="form-control" placeholder="descripcion"
+                      name="descripcion" [(ngModel)]="descripcionReparacion">
+                  </div>
+                </div>
+                <div class="col-md-12 col-12">
+                  <div class="form-group">
+                    <label for="city-column">Observaciones</label>
+                    <input type="text" id="city-column" class="form-control" placeholder="Observaciones" name="observaciones" [(ngModel)]="observaciones">
+                  </div>
+                </div>
+
+
+                <div class="col-12 d-flex justify-content-end">
+                  <button type="submit" class="btn btn-primary me-1 mb-1" (click)="registrarReparacion()">Guardar</button>
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>

@@ -10,6 +10,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TablaReparacionesComponent } from './tabla-reparaciones/tabla-reparaciones-componet';
+import { BuscadorReparacionesComponent } from './buscador-reparaciones/buscador-reparaciones.component';
 
 
 @NgModule({
@@ -17,7 +19,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AgregarReparacionesComponent,
     ListarReparacionesComponent,
     ReparacionesComponent,
-    ReparacionesFinalizadasComponent
+    ReparacionesFinalizadasComponent,
+    TablaReparacionesComponent,
+    BuscadorReparacionesComponent
+
   ],
   imports: [
     CommonModule,

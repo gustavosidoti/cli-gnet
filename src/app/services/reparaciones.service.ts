@@ -10,7 +10,7 @@ const base_url = environment.base_url;
 @Injectable({
   providedIn: 'root'
 })
-export class ElementosService {
+export class ReparacionesService {
 
   constructor(private http: HttpClient,
     private router: Router) { }
@@ -31,43 +31,40 @@ export class ElementosService {
     }
     }
 
-    agregarElemento(data:any){
-    const url = `${ base_url }/elementos`;
+    agregarReparacion(data:any){
+    const url = `${ base_url }/reparaciones`;
 
     return this.http.post( url, data ,this.headers );
     }
 
-    listarElementos(desde: number = 0, criterio:string = ''){
+    listarReparaciones(desde: number = 0, criterio:string = ''){
 
-
-      const url = `${ base_url }/elementos?desde=${desde}&criterio=${criterio}`;
+      const url = `${ base_url }/reparaciones?desde=${desde}&criterio=${criterio}`;
 
       return this.http.get( url, this.headers );
     }
 
 
 
-    editarElemento(data:any){
+    editarReparacion(data:any){
 
-      console.log(data);
-      const url = `${ base_url }/elementos/${data.id}`;
+      const url = `${ base_url }/reparaciones/${data.id}`;
 
       return this.http.put( url, data ,this.headers );
     }
 
-    eliminarElemento(data:any){
+    buscarReparacionPorElemento(desde: number = 0, criterio:string = ''){
 
-      console.log(data);
-      const url = `${ base_url }/elementos/delete?id=${data}`;
+      const url = `${ base_url }/reparaciones/buscarPorElemento?desde=${desde}&criterio=${criterio}`;
 
-      return this.http.delete( url, this.headers );
+      return this.http.get( url,this.headers );
     }
 
-    listarTodosElementos(){
+    buscarReparacionPorEstado(desde: number = 0, estadoRep:string = ''){
 
-      const url = `${ base_url }/elementos/todos`;
+      const url = `${ base_url }/reparaciones/buscarPorEstado?desde=${desde}&estadorep=${estadoRep}`;
 
-      return this.http.get( url, this.headers );
+      return this.http.get( url,this.headers );
     }
 
 }

@@ -1,0 +1,49 @@
+<div class="table-responsive">
+  <table class="table table-striped mb-0">
+    <thead>
+      <tr>
+        <th>nro de Reparación</th>
+        <th>Fecha Ingreso</th>
+        <th>Descripcion</th>
+        <th>Elemento</th>
+        <th>Estado</th>
+        <th>Acción</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reparacion of reparaciones">
+        <td>{{reparacion.reparacionNro}}</td>
+        <td>{{reparacion.fechaIngreso | date: 'dd/MM/yyyy'}}</td>
+        <td>{{reparacion.descripcionReparacion}}</td>
+        <td>{{reparacion.elemento.descripcion}}</td>
+        <td><span *ngIf="reparacion.estadoRep == 'En proceso'"  class="badge bg-light-success">{{reparacion.estadoRep}}</span>
+            <span *ngIf="reparacion.estadoRep == 'Esperando repuesto'"  class="badge bg-light-warning">{{reparacion.estadoRep}}</span>
+        </td>
+        <td>
+          <div class="buttons">
+
+            <a (click)="FormeditarReparacionAca(reparacion._id, reparacion.descripcion, reparacion.nro, reparacion.marca, reparacion.modelo)" class="btn icon btn-warning"
+              data-bs-toggle="modal" data-bs-target="#editFormC"> <i class="bi bi-pencil-square"></i></a>
+
+
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<br>
+<!-- Botones de paginación -->
+<button [disabled]="desde === 0" (click)="cambiarPagina(-1)" class="btn btn-secondary">
+Anteriores
+</button>
+&nbsp;
+<button [disabled]="!mostrarBtnSiguientes" (click)="cambiarPagina(1)" class="btn btn-secondary">
+Siguientes
+</button>
