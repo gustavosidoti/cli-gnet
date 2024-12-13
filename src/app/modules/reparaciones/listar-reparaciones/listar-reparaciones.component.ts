@@ -27,10 +27,10 @@ export class ListarReparacionesComponent implements OnInit {
 
   // Formularios de Reparaciones
   idReparacion:any;
-  descripcionReparacion:string='';
-  elemento:any;
-  estado:string;
-  observaciones:string;
+  nroReparacion:any
+  descripcionReparacion:string;
+  observacionReparacion:any;
+  estadoReparacion:any;
 
   // buscador
   criterioBusqueda:any='';
@@ -54,18 +54,21 @@ export class ListarReparacionesComponent implements OnInit {
 
 
  formeditarReparacion(ReparacionRecibida:any){
-   this.elemento = ReparacionRecibida.elemento;
+   this.nroReparacion = ReparacionRecibida.nroReparacion;
    this.descripcionReparacion = ReparacionRecibida.descripcionReparacion;
-   this.estado = ReparacionRecibida.estado;
+   this.estadoReparacion = ReparacionRecibida.estadoReparacion;
 
   }
 
   editarReparacion(){
+
+
+
     let data = {
       idReparacion: this.idReparacion,
       descripcion : this.descripcionReparacion,
-      observaciones : this.observaciones,
-      estado : this.estado
+      observaciones : this.observacionReparacion,
+      estado : this.estadoReparacion
     }
 
     this.reparacionesService.editarReparacion(data).subscribe((resp:any) =>{
@@ -76,9 +79,9 @@ export class ListarReparacionesComponent implements OnInit {
        this.listarReparaciones(0,this.criterioBusqueda);
 
       this.descripcionReparacion = '';
-      this.elemento = '';
-      this.estado = '';
-      this.observaciones = '';
+      this.nroReparacion = '';
+      this.estadoReparacion = '';
+      this.observacionReparacion = '';
 
     })
   }
@@ -121,6 +124,11 @@ export class ListarReparacionesComponent implements OnInit {
     this.router.navigateByUrl('/reparaciones/agregar-reparaciones');
   }
 
-
+  buscarReparacionesPorFechas(Fechas:{fechaDesde:Date, fechaHasta:Date}){
+    this.reparacionesService.buscarReparacionPorFechas(0,Fechas.fechaDesde, Fechas.fechaHasta).subscribe((resp:any) => {
+      this.reparaciones = resp.reparaciones
+      console.log(resp.reparaciones);
+    })
+  }
 
 }

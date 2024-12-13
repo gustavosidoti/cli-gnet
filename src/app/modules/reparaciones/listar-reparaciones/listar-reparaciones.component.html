@@ -7,7 +7,7 @@
         <div class="card-content">
 
 
-          <app-buscador-reparaciones (busquedaPorElemento)="buscarReparacionesPorElemento($event)" (buscarPorNroReparacion)="buscarReparacionesPorEstado($event)" (busquedaPorEstado)="buscarReparacionesPorEstado($event)"></app-buscador-reparaciones>
+          <app-buscador-reparaciones (busquedaPorElemento)="buscarReparacionesPorElemento($event)" (buscarPorNroReparacion)="buscarReparacionesPorEstado($event)" (busquedaPorFechas)="buscarReparacionesPorFechas($event)"  (busquedaPorEstado)="buscarReparacionesPorEstado($event)"></app-buscador-reparaciones>
 
 
           <div class="row" *ngIf="mostrar">
@@ -53,7 +53,7 @@
 
 <!-- Striped rows end -->
 
-<!--login form Modal -->
+<!--FORMULARIO DE EDICIÓN -->
 <div class="modal fade text-left" id="editFormC" tabindex="-1" role="dialog"
 aria-labelledby="myModalLabel33" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
@@ -73,9 +73,9 @@ aria-labelledby="myModalLabel33" aria-hidden="true">
                     <div class="row">
                         <div class="col-md-6 col-12">
                             <div class="form-group">
-                                <label for="first-name-column">Descripcion</label>
+                                <label for="first-name-column">Nro de Reparación</label>
                                 <input type="text" id="descripcion" class="form-control"
-                                    placeholder="Descripción" name="descripcion" [(ngModel)]="elemento">
+                                    placeholder="Descripción" name="descripcion" [(ngModel)]="nroReparacion" disabled>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
@@ -85,18 +85,18 @@ aria-labelledby="myModalLabel33" aria-hidden="true">
                                     placeholder="Desccripción" name="descripcionReparacion" [(ngModel)]="descripcionReparacion">
                             </div>
                         </div>
-                        <div class="col-md-6 col-12">
+                        <div class="col-md-12 col-12">
                             <div class="form-group">
-                                <label for="city-column">Observaciones</label>
-                                <input type="text" id="observaciones" class="form-control" placeholder="Observaciones"
-                                    name="observaciones" [(ngModel)]="observaciones">
+                                <label for="observaciones">Observaciones</label>
+                                <textarea type="textarea" id="observaciones" class="form-control" placeholder="Observaciones"
+                                    name="observaciones" [(ngModel)]="observacionReparacion" rows="4"></textarea>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="country-floating">Estado</label>
                                 <input type="text" id="estado" class="form-control"
-                                    name="estado" placeholder="Estado" [(ngModel)]="estado" >
+                                    name="estado" placeholder="Estado" [(ngModel)]="estadoReparacion" >
                             </div>
                         </div>
 

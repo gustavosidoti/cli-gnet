@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { CarrerasService } from 'src/app/services/carreras.service';
 import { PagesActiveService } from 'src/app/services/pages-active.service';
-import { PersonasService } from 'src/app/services/personas.service';
 import { ElementosService } from '../../../services/elementos.service';
 import { ReparacionesService } from '../../../services/reparaciones.service';
 
@@ -17,10 +15,13 @@ export class BuscadorReparacionesComponent {
   @Output() buscarPorNroReparacion = new EventEmitter<string>();
   @Output() busquedaPorElemento = new EventEmitter<any>();
   @Output() busquedaPorEstado = new EventEmitter<string>();
+  @Output() busquedaPorFechas = new EventEmitter();
 
   public totalPersonas: number = 0;
   personas:any[] = [];
   elementos:any[] = [];
+  fechaDesde:Date;
+  fechaHasta:Date;
 
   constructor(
     public pageActive: PagesActiveService,
@@ -61,7 +62,9 @@ export class BuscadorReparacionesComponent {
         this.buscarPorNroReparacion.emit(term);
       }
 
-
+      buscarPorfecha(){
+        this.busquedaPorFechas.emit({fechaDesde: this.fechaDesde, fechaHasta:this.fechaHasta})
+      }
 
 
 

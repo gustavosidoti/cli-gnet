@@ -71,10 +71,10 @@ listarReparaciones(desde: number, criterio: string = ""): void {
 }
 
   // COMPLETA LOS CAMPOS DEL FORMULARIO EDITAR PERSONAS
- FormeditarReparacionAca(id:any, descripcion:any, nro:any, marca:any, modelo:any){
+ FormeditarReparacionAca(id:any, descripcion:any, nroReparacion:any, elemento:any, observaciones:any, estadoRep:any){
 
 
-  this.editarReparacion.emit({id,descripcion,nro,marca,modelo});
+  this.editarReparacion.emit({id,descripcion,nroReparacion,elemento,observaciones,estadoRep});
 
 
 }

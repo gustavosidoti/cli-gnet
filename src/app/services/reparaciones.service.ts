@@ -67,4 +67,11 @@ export class ReparacionesService {
       return this.http.get( url,this.headers );
     }
 
+    buscarReparacionPorFechas(desde: number = 0, fechaDesde:Date, fechaHasta:Date){
+
+      const url = `${ base_url }/reparaciones/buscarPorFechas?desde=${desde}&fechaDesde=${fechaDesde}&fechaHasta=${fechaHasta}`;
+
+      return this.http.get( url,this.headers );
+    }
+
 }
