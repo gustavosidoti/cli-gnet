@@ -20,13 +20,6 @@
       Buscar por rango de fechas
     </label>
   </div>
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" value="opcion4"
-      [(ngModel)]="opcionSeleccionada">
-    <label class="form-check-label" for="flexRadioDefault4">
-      Buscar por estado
-    </label>
-  </div>
 </div>
 
 
@@ -81,13 +74,4 @@
 </div>
 
 
-<div class="col-md-6 mb-4" *ngIf="opcionSeleccionada === 'opcion4'">
 
-  <div class="form-group">
-    <select class="choices form-select" #Estado (change)="onEstadoRepChange(Estado.value)">
-      <option value="" disabled selected>Selecciona un Estado</option>
-      <option value="En proceso" >En proceso</option>
-      <option value="Esperando repuesto" >Esperando repuesto</option>
-    </select>
-  </div>
-</div>

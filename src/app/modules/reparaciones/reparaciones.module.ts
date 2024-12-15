@@ -12,6 +12,9 @@ import { MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TablaReparacionesComponent } from './tabla-reparaciones/tabla-reparaciones-componet';
 import { BuscadorReparacionesComponent } from './buscador-reparaciones/buscador-reparaciones.component';
+import { BuscadorReparacionesFinalizadasComponent } from './buscador-reparaciones-finalizadas/buscador-reparaciones-finalizadas.component';
+import { TablaReparacionesFinalizadasComponent } from './tabla-reparaciones-finalizadas/tabla-reparaciones-finalizadas.component';
+
 
 
 @NgModule({
@@ -20,7 +23,9 @@ import { BuscadorReparacionesComponent } from './buscador-reparaciones/buscador-
     ListarReparacionesComponent,
     ReparacionesComponent,
     ReparacionesFinalizadasComponent,
+    BuscadorReparacionesFinalizadasComponent,
     TablaReparacionesComponent,
+    TablaReparacionesFinalizadasComponent,
     BuscadorReparacionesComponent
 
   ],

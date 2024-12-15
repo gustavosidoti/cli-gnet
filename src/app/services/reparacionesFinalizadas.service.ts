@@ -10,7 +10,7 @@ const base_url = environment.base_url;
 @Injectable({
   providedIn: 'root'
 })
-export class ReparacionesService {
+export class ReparacionesFinalizadasService {
 
   constructor(private http: HttpClient,
     private router: Router) { }
@@ -31,22 +31,18 @@ export class ReparacionesService {
     }
     }
 
-    agregarReparacion(data:any){
-    const url = `${ base_url }/reparaciones`;
 
-    return this.http.post( url, data ,this.headers );
-    }
 
-    listarReparaciones(desde: number = 0, criterio:string = ''){
+    listarReparacionesFinalizadas(desde: number = 0, criterio:string = ''){
 
-      const url = `${ base_url }/reparaciones?desde=${desde}&criterio=${criterio}`;
+      const url = `${ base_url }/reparaciones/finalizadas?desde=${desde}&criterio=${criterio}`;
 
       return this.http.get( url, this.headers );
     }
 
 
 
-    editarReparacion(data:any){
+    editarReparacionFinalizada(data:any){
 
       const url = `${ base_url }/reparaciones/${data.idReparacion}`;
       console.log(data.idReparacion);
@@ -55,21 +51,14 @@ export class ReparacionesService {
 
     buscarReparacionPorElemento(desde: number = 0, criterio:string = ''){
 
-      const url = `${ base_url }/reparaciones/buscarPorElemento?desde=${desde}&criterio=${criterio}`;
-
-      return this.http.get( url,this.headers );
-    }
-
-    buscarReparacionPorEstado(desde: number = 0, estadoRep:string = ''){
-
-      const url = `${ base_url }/reparaciones/buscarPorEstado?desde=${desde}&estadorep=${estadoRep}`;
+      const url = `${ base_url }/reparaciones/finalizadas/buscarPorElemento?desde=${desde}&criterio=${criterio}`;
 
       return this.http.get( url,this.headers );
     }
 
     buscarReparacionPorFechas(desde: number = 0, fechaDesde:Date, fechaHasta:Date){
 
-      const url = `${ base_url }/reparaciones/buscarPorFechas?desde=${desde}&fechaDesde=${fechaDesde}&fechaHasta=${fechaHasta}`;
+      const url = `${ base_url }/reparaciones/finalizadas/buscarPorFechas?desde=${desde}&fechaDesde=${fechaDesde}&fechaHasta=${fechaHasta}`;
 
       return this.http.get( url,this.headers );
     }

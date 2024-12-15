@@ -7,7 +7,7 @@
         <div class="card-content">
 
 
-          <app-buscador-reparaciones (busquedaPorElemento)="buscarReparacionesPorElemento($event)" (buscarPorNroReparacion)="buscarReparacionesPorEstado($event)" (busquedaPorFechas)="buscarReparacionesPorFechas($event)"  (busquedaPorEstado)="buscarReparacionesPorEstado($event)"></app-buscador-reparaciones>
+          <app-buscador-reparaciones (busquedaPorElemento)="buscarReparacionesPorElemento($event)" (buscarPorNroReparacion)="buscarReparacionesPorNumero($event)" (busquedaPorFechas)="buscarReparacionesPorFechas($event)"  (busquedaPorEstado)="buscarReparacionesPorEstado($event)"></app-buscador-reparaciones>
 
 
           <div class="row" *ngIf="mostrar">
@@ -74,8 +74,8 @@ aria-labelledby="myModalLabel33" aria-hidden="true">
                         <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="first-name-column">Nro de Reparación</label>
-                                <input type="text" id="descripcion" class="form-control"
-                                    placeholder="Descripción" name="descripcion" [(ngModel)]="nroReparacion" disabled>
+                                <input type="text" id="nroReparacion" class="form-control"
+                                     name="nroReparacion" [(ngModel)]="nroReparacion" disabled>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
@@ -93,11 +93,12 @@ aria-labelledby="myModalLabel33" aria-hidden="true">
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
-                            <div class="form-group">
-                                <label for="country-floating">Estado</label>
-                                <input type="text" id="estado" class="form-control"
-                                    name="estado" placeholder="Estado" [(ngModel)]="estadoReparacion" >
-                            </div>
+                          <div class="form-group">
+                            <label for="last-name-column">Estado de Reparación</label>
+                            <select class="choices form-select" name="estadoRep" [(ngModel)]="estadoReparacion">
+                              <option *ngFor="let estado of EstadosRep" [value]="estado">{{estado}}</option>
+                            </select>
+                          </div>
                         </div>
 
 

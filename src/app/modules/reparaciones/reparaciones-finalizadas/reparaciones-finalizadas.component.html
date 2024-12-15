@@ -1,16 +1,124 @@
-<div class="datepicker-container">
-  <mat-form-field appearance="outline">
-    <mat-label>Selecciona una fecha</mat-label>
-    <input matInput [matDatepicker]="pickerDesde" [(ngModel)]="selectedDate">
-    <mat-datepicker-toggle matSuffix [for]="pickerDesde"></mat-datepicker-toggle>
-    <mat-datepicker #pickerDesde></mat-datepicker>
-  </mat-form-field>
+<section class="section">
+  <div class="row" id="table-striped">
+    <div class="col-12">
+      <div class="card">
+
+        <div class="card-content">
+
+
+          <app-buscador-reparaciones-finalizadas (busquedaPorElemento)="buscarReparacionesPorElemento($event)" (buscarPorNroReparacion)="buscarReparacionesPorNumero($event)" (busquedaPorFechas)="buscarReparacionesPorFechas($event)"></app-buscador-reparaciones-finalizadas>
+
+
+          <div class="row" *ngIf="mostrarM">
+            <div class="col-12">
+              <div class="alert alert-info text-center">
+                <h4 class="alert-heading">Cargando</h4>
+                <div class="spinner-border text-light" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mb-0">Por favor espere</p>
+              </div>
+            </div>
+          </div>
+
+          <!--BOTÓN AGREGAR -->
+          <div class="row" *ngIf="mostrarM == false">
+            <div class="col-12">
+                <button class="btn btn-success" data-bs-toggle="modal"
+                data-bs-target="#inlineForm" (click)="btnExportarReparaciones()">
+                    <i class="bi bi-plus-circle"></i>
+                    Exportar a Excel</button>
+            </div>
+          </div>
+
+          <!-- table striped -->
+          <!-- INICIO DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
+          <app-tabla-reparaciones-finalizadas [reparaciones]="reparaciones" (editarReparacion)="formeditarReparacion($event)"></app-tabla-reparaciones-finalizadas>
+          <!-- FIN DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
+
+
+        </div>
+        <!-- FIN DIV QUE ENGLOBA BOTÓN AGREGAR + TABLA + BOTONES DE NAVEGACION  -->
+      </div>
+
+      <div *ngIf="reparaciones.length === 0" class="alert alert-warning text-center">
+        No hay registros para mostrar
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- Striped rows end -->
+
+<!--FORMULARIO DE EDICIÓN -->
+<div class="modal fade text-left" id="editFormC" tabindex="-1" role="dialog"
+aria-labelledby="myModalLabel33" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+    role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel33">Editar Reparación </h4>
+            <button type="button" class="close" data-bs-dismiss="modal"
+                aria-label="Close">
+                <i data-feather="x"></i>
+            </button>
+        </div>
+        <form action="#">
+          <div class="card-content">
+            <div class="card-body">
+                <form class="form">
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="first-name-column">Nro de Reparación</label>
+                                <input type="text" id="nroReparacion" class="form-control"
+                                     name="nroReparacion" [(ngModel)]="nroReparacion" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="last-name-column">Descripcion</label>
+                                <input type="text" id="descripcionReparacion" class="form-control"
+                                    placeholder="Desccripción" name="descripcionReparacion" [(ngModel)]="descripcionReparacion">
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-12">
+                            <div class="form-group">
+                                <label for="observaciones">Observaciones</label>
+                                <textarea type="textarea" id="observaciones" class="form-control" placeholder="Observaciones"
+                                    name="observaciones" [(ngModel)]="observacionReparacion" rows="4"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                          <div class="form-group">
+                            <label for="last-name-column">Estado de Reparación</label>
+                            <select class="choices form-select" name="estadoRep" [(ngModel)]="estadoReparacion">
+                              <option *ngFor="let estado of EstadosRep" [value]="estado">{{estado}}</option>
+                            </select>
+                          </div>
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-secondary"
+                    data-bs-dismiss="modal">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Cerrar</span>
+                </button>
+                <button type="button" class="btn btn-primary ml-1"
+                    data-bs-dismiss="modal" (click)="editarReparacion()" >
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Editar</span>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
-<div class="datepicker-container">
-  <mat-form-field appearance="outline">
-    <mat-label>Selecciona fecha hasta</mat-label>
-    <input matInput [matDatepicker]="pickerHasta" [(ngModel)]="selectedDate2">
-    <mat-datepicker-toggle matSuffix [for]="pickerHasta"></mat-datepicker-toggle>
-    <mat-datepicker #pickerHasta></mat-datepicker>
-  </mat-form-field>
 </div>
+<!-- Fin modal-->

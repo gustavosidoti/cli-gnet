@@ -7,6 +7,7 @@
         <th>Descripcion</th>
         <th>Elemento</th>
         <th>Estado</th>
+        <th>Fecha Finalización</th>
         <th>Acción</th>
 
       </tr>
@@ -17,9 +18,9 @@
         <td>{{reparacion.fechaIngreso | date: 'dd/MM/yyyy'}}</td>
         <td>{{reparacion.descripcionReparacion}}</td>
         <td>{{reparacion.elemento.descripcion}}</td>
-        <td><span *ngIf="reparacion.estadoRep == 'En proceso'"  class="badge bg-light-success">{{reparacion.estadoRep}}</span>
-            <span *ngIf="reparacion.estadoRep == 'Esperando repuesto'"  class="badge bg-light-warning">{{reparacion.estadoRep}}</span>
+        <td><span *ngIf="reparacion.estadoRep == 'Finalizada'"  class="badge bg-light-danger">{{reparacion.estadoRep}}</span>
         </td>
+        <td>{{reparacion.fechaFinReparacion | date: 'dd/MM/yyyy'}}</td>
         <td>
           <div class="buttons">
 

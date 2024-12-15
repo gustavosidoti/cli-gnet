@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { PagesActiveService } from 'src/app/services/pages-active.service';
-import { ReparacionesService } from 'src/app/services/reparaciones.service';
+import { ReparacionesFinalizadasService } from 'src/app/services/reparacionesFinalizadas.service';
 
 @Component({
-  selector: 'app-tabla-reparaciones',
-  templateUrl: './tabla-reparaciones.component.html',
+  selector: 'app-tabla-reparaciones-finalizadas',
+  templateUrl: './tabla-reparaciones-finalizadas.component.html',
 
 })
-export class TablaReparacionesComponent implements OnInit {
+export class TablaReparacionesFinalizadasComponent implements OnInit {
 
   @Input() reparaciones: any[] = []; // Asegúrate de definir el tipo correcto
   @Input() totalReparaciones: number = 0;
@@ -25,7 +25,7 @@ export class TablaReparacionesComponent implements OnInit {
 
 
   constructor(public pageActive: PagesActiveService,
-              public reparacionesService: ReparacionesService,
+              public reparacionesFinalizadasService: ReparacionesFinalizadasService,
               public router: Router) { }
 
 
@@ -34,7 +34,7 @@ export class TablaReparacionesComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.pageActive.paginaActiva(4);
+    this.pageActive.paginaActiva(6);
     this.listarReparaciones(0)
   }
 
@@ -58,7 +58,7 @@ export class TablaReparacionesComponent implements OnInit {
 listarReparaciones(desde: number, criterio: string = ""): void {
   this.mostrar = true; // Mostrar indicador de carga (opcional)
 
-  this.reparacionesService.listarReparaciones(desde, criterio).subscribe((resp: any) => {
+  this.reparacionesFinalizadasService.listarReparacionesFinalizadas(desde, criterio).subscribe((resp: any) => {
       this.reparaciones = resp.reparaciones;
       this.totalReparaciones = resp.cantidad;
 

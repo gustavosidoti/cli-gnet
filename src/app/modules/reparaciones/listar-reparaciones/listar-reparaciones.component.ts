@@ -31,6 +31,7 @@ export class ListarReparacionesComponent implements OnInit {
   descripcionReparacion:string;
   observacionReparacion:any;
   estadoReparacion:any;
+  EstadosRep: string[] = ["En proceso","Esperando repuesto","Finalizada"]
 
   // buscador
   criterioBusqueda:any='';
@@ -54,9 +55,11 @@ export class ListarReparacionesComponent implements OnInit {
 
 
  formeditarReparacion(ReparacionRecibida:any){
-   this.nroReparacion = ReparacionRecibida.nroReparacion;
-   this.descripcionReparacion = ReparacionRecibida.descripcionReparacion;
-   this.estadoReparacion = ReparacionRecibida.estadoReparacion;
+   this.idReparacion =ReparacionRecibida.id;
+   this.nroReparacion = ReparacionRecibida.reparacionNro;
+   this.descripcionReparacion = ReparacionRecibida.descripcion;
+   this.estadoReparacion = ReparacionRecibida.estadoRep;
+   this.observacionReparacion = ReparacionRecibida.observaciones;
 
   }
 
@@ -66,9 +69,9 @@ export class ListarReparacionesComponent implements OnInit {
 
     let data = {
       idReparacion: this.idReparacion,
-      descripcion : this.descripcionReparacion,
+      descripcionReparacion : this.descripcionReparacion,
       observaciones : this.observacionReparacion,
-      estado : this.estadoReparacion
+      estadoRep : this.estadoReparacion
     }
 
     this.reparacionesService.editarReparacion(data).subscribe((resp:any) =>{
@@ -99,7 +102,7 @@ export class ListarReparacionesComponent implements OnInit {
 
   }
 
-  buscarReparacionesPorNro(nroRep:string){
+  buscarReparacionesPorNumero(nroRep:string){
 
     this.listarReparaciones(0,nroRep);
   }

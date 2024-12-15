@@ -1,14 +1,13 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { PagesActiveService } from 'src/app/services/pages-active.service';
-import { ElementosService } from '../../../services/elementos.service';
-import { ReparacionesService } from '../../../services/reparaciones.service';
+
 
 @Component({
-  selector: 'app-buscador-reparaciones',
-  templateUrl: './buscador-reparaciones.component.html',
+  selector: 'app-buscador-reparaciones-finalizadas',
+  templateUrl: './buscador-reparaciones-finalizadas.component.html',
 })
-export class BuscadorReparacionesComponent {
+export class BuscadorReparacionesFinalizadasComponent {
   opcionSeleccionada: string = 'opcion1';
   criterioBusquedaP: string = '';
 
@@ -25,34 +24,19 @@ export class BuscadorReparacionesComponent {
 
   constructor(
     public pageActive: PagesActiveService,
-    public reparacionesService: ReparacionesService,
-    public elementosService:ElementosService,
     public router: Router) { }
 
     ngOnInit(): void {
 
-      this.pageActive.paginaActiva(4);
-      this.listarTodosElementos();
+      this.pageActive.paginaActiva(6);
+
     }
 
-        // METODO QUE BUSCA TRAE TODAS LAS CARRERAS
-        listarTodosElementos(){
-
-          this.elementosService.listarTodosElementos().subscribe((resp:any) =>{
-          this.elementos = resp.elementos;
-        })
-
-       }
-
-      // FUNCION QUE FILTRA POR CARRERA Y DEVUELVE AL PADRE LA CARRERA SELECCIONADA
+      // FUNCION QUE FILTRA POR NRO Y DEVUELVE AL PADRE LA REPARACION SELECCIONADA
       onNroChange(elemento: string) {
 
         this.busquedaPorElemento.emit(elemento);
 
-      }
-
-      onEstadoRepChange(estado:string){
-        this.busquedaPorEstado.emit(estado);
       }
 
       // FUNCION PARA FILTRAR POR TECLADO Y DEVUELVE AL PADRE EL CRITERIO DE BUSQUEDA
@@ -65,10 +49,6 @@ export class BuscadorReparacionesComponent {
       buscarPorfecha(){
         this.busquedaPorFechas.emit({fechaDesde: this.fechaDesde, fechaHasta:this.fechaHasta})
       }
-
-
-
-
 
 
 }
